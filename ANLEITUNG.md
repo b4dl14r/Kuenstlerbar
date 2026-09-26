@@ -1,41 +1,28 @@
-# Künstlerbar Website 5.0 – Anleitung
+# Künstlerbar Website 6.0 – Anleitung
 
 Diese Datei erklärt, wie die Website gepflegt wird, ohne
-Programmierkenntnisse. Alle Dateien liegen in diesem Ordner
-(`kuenstlerbar-website-v5`). Zum Bearbeiten reicht ein Texteditor
+Programmierkenntnisse. Zum Bearbeiten reicht ein Texteditor
 (z. B. [VS Code](https://code.visualstudio.com/), kostenlos).
 
-Öffne eine Datei per Rechtsklick → „Öffnen mit" → Editor
-(nicht per Doppelklick, das öffnet sie im Browser).
+**Neu in Version 6.0**
 
-**Neu in Version 5.0**
-
-- Aus dem One-Pager sind **echte Unterseiten** geworden. Jede hat eigenen
-  Titel, eigene Beschreibung und kann bei Google einzeln ranken:
-  - `/` Startseite
-  - `/getraenkekarte/` vollständige Karte
-  - `/vermietung/` plus `/vermietung/firmenevents/`, `/vermietung/tastings/`,
-    `/vermietung/zigarrenabende/`
-  - `/cocktailkurse/`
-  - `/impressum/`, `/datenschutz/`, `404.html`
-- **Strukturierte Daten** (JSON-LD) auf jeder Seite: Bar, Website, Seite,
-  Brotkrumen, komplette Getränkekarte, Vermietungs-Service, Kurs.
-- **Öffnungszeiten** kommen aus `assets/data/hours.json` und können
-  wöchentlich automatisch aus dem Google-Business-Profil gezogen werden.
-- **Navigation neu**: kein Kapselrahmen, keine Farbfläche mehr, sondern
-  eine feine Goldlinie, die zum aktiven Punkt wandert. Reihenfolge:
-  Die Bar, Karte, Vermietung, Galerie, Kontakt. Unter **Vermietung**
-  klappt ein Untermenü mit allen fünf Angeboten auf, auf dem Handy per
-  Tipp auf- und wieder zuklappbar.
-- **Anfrage-Fenster**: Knöpfe mit `class="js-anfrage"` öffnen ein Fenster
-  mit Anlass, Datum, Personenzahl und Telefon. Daraus entsteht eine
-  fertige E-Mail. Nichts wird gespeichert oder im Hintergrund verschickt.
-- **Glanz- und Partikeleffekte entfernt** (Bilder, Knöpfe, Hero), ebenso
-  der mitlaufende Goldstreifen am oberen Seitenrand.
-- **Getränke nur noch auf `/getraenkekarte/`** — dort stehen jetzt auch
-  die Barkeeper-Empfehlungen. Die Startseite verweist nur darauf.
-- **Hero-Video** möglich, mit Standbild als Rückfall. Derzeit
-  ausgeschaltet, siehe Abschnitt 5.
+- **Nur noch ein Design:** schwarz. Der Umschalter hell/dunkel ist weg.
+- **Neue Schriften:** Bodoni Moda für Überschriften, Hanken Grotesk für
+  Text. Die goldene Schreibschrift in den Überschriften gibt es nicht mehr.
+- **Ladescreen:** Beim ersten Aufruf wirft der Angler aus dem Logo die
+  Olive aus. Dauert das Laden länger, holt er ein und wirft neu aus, bis
+  die Seite fertig ist. Pro Browser-Sitzung nur einmal, bei „weniger
+  Bewegung“ gar nicht. Ein Klick überspringt ihn.
+- **Logo als echte Vektorgrafik:** `assets/img/logo.svg` (ganzes Logo) und
+  `assets/img/logo-teile.svg` (in Teile zerlegt für den Ladescreen).
+- **Mobiles Menü** als schwarzer Vollbild-Vorhang von oben, mit neuem
+  Menü-Symbol. Sprachwahl DE / EN ganz rechts (Desktop) bzw. ganz unten
+  im Menü (Handy).
+- **Englische Seiten** unter `/en/` (siehe Abschnitt 10).
+- **Bilder** ohne Rahmen und runde Ecken, auf dem Handy randlos. Beim
+  Scrollen zoomen große Bilder langsam heraus, Galeriebilder öffnen sich
+  wie ein Vorhang.
+- **Knöpfe** eckig, Sektionen mit Nummer und Linie klar getrennt.
 
 ---
 
@@ -116,9 +103,12 @@ Orientierung dienen die `id`-Namen der Abschnitte: `#bar`, `#karte`,
 `#fragen`.
 
 Text steht immer zwischen einem öffnenden und einem schließenden Tag;
-die spitzen Klammern selbst bitte nicht anfassen. Was zwischen
-`<span class="script-accent">` steht, erscheint in goldener
-Schreibschrift.
+die spitzen Klammern selbst bitte nicht anfassen. Die kleine Zeile über
+jeder Sektion (`<p class="marke"><b>02</b>Karte</p>`) ist Nummer und Name
+der Sektion.
+
+**Wichtig:** Jede Textänderung auch auf der englischen Seite unter `/en/`
+nachziehen (siehe Abschnitt 10).
 
 **Wenn sich ein Titel oder eine Beschreibung ändert**, bitte oben im
 `<head>` mitziehen: `<title>`, `<meta name="description">`,
@@ -231,15 +221,13 @@ dem echten Tresen-Foto geschnitten.
 
 ## 5. Hero-Video
 
-> **Aktuell ausgeschaltet.** In `index.html` steht die Hero-Sektion als
-> `<section class="hero">` ohne `data-video`. Zum Wiedereinschalten das
-> Attribut ergänzen:
+> **Aktuell ausgeschaltet.** In `index.html` (und `en/index.html`) steht
+> die Hero-Sektion als `<section class="hero" …>` ohne `data-video`. Zum
+> Wiedereinschalten das Attribut ergänzen:
 >
 > ```html
-> <section class="hero" data-video="/assets/video/hero-tresen">
+> <section class="hero" data-video="/assets/video/hero-tresen" aria-label="Künstlerbar">
 > ```
->
-> Der Kommentar direkt darüber in `index.html` erinnert daran.
 
 Die Startseite kann ein leise loopendes Video hinter der Überschrift
 zeigen. Erwartet werden zwei Dateien:
@@ -258,8 +246,7 @@ Regeln, die schon eingebaut sind:
 - Lädt das Video länger als 5 Sekunden, bricht main.js das Laden ab und es
   bleibt beim Standbild — kein endloses Warten auf langsamen Verbindungen
 - Ton ist immer aus, kein Bedienelement
-- Poster/Rückfall ist `assets/img/hero-bar-panorama.jpg`, zusätzlich hat
-  das `<video>` selbst `assets/img/hero-bar-video-poster.jpg` als `poster`
+- Standbild und Poster ist `assets/img/hero-bar-video-poster.jpg`
 
 Aktuell liegt dort ein Ausschnitt aus eurem eigenen Material: ein
 Vorwärts-Rückwärts-Loop (Boomerang) aus 1,8 Sekunden Rohmaterial, dadurch
@@ -279,7 +266,7 @@ ffmpeg -i assets/video/hero-tresen.mp4 -an -c:v libvpx-vp9 -crf 34 -b:v 0 -row-m
 ```
 
 **Selbst austauschen, ohne ffmpeg:** einfach die beiden Dateien in
-`kuenstlerbar-website-v5/assets/video/` überschreiben. Die Namen müssen
+`kuenstlerbar-website-v6/assets/video/` überschreiben. Die Namen müssen
 `hero-tresen.mp4` und `hero-tresen.webm` bleiben, dann zieht die Seite das
 neue Material ohne weitere Änderung. Nur eine MP4-Datei reicht auch; die
 WebM-Datei ist Kür, sie spart Ladezeit. Das Rohmaterial aus dem Drive
@@ -289,15 +276,12 @@ liegt hier: `Vorlagen von Künstlerbar/Videos Drive/1.MOV` bis `4.MOV`.
 
 ## 6. Farben und Schriften
 
-**Datei:** `css/style.css`, ganz oben.
+**Datei:** `css/style.css`, ganz oben unter `:root { … }`.
 
-- `:root { … }` = Schema **„Wein"** (Standard)
-- `html[data-theme="dark"] { … }` = Schema **„Nacht"**
-
-Gold, Kupfer und Schriften gelten in beiden Schemata. Nach einer
-Farbänderung bitte beide Varianten prüfen (Umschalter in der Fußzeile).
-
----
+- `--gold` ist die Akzentfarbe (Knöpfe, Logo, Linien)
+- `--schwarz` / `--flaeche` sind die beiden Hintergründe, die sich von
+  Sektion zu Sektion abwechseln (`sektion--tief` = etwas heller)
+- Schriften liegen in `assets/fonts/` und werden nicht von Google geladen
 
 ## 7. Neue Seite anlegen
 
@@ -337,6 +321,33 @@ Beim Hoster darauf achten:
 
 ---
 
+## 10. Englische Seiten
+
+| Deutsch | Englisch |
+|---|---|
+| `/` | `/en/` |
+| `/getraenkekarte/` | `/en/drinks/` |
+| `/vermietung/` | `/en/private-hire/` |
+| `/vermietung/firmenevents/` | `/en/private-hire/corporate-events/` |
+| `/vermietung/tastings/` | `/en/private-hire/tastings/` |
+| `/vermietung/zigarrenabende/` | `/en/private-hire/cigar-evenings/` |
+| `/cocktailkurse/` | `/en/cocktail-classes/` |
+| `/impressum/` | `/en/legal-notice/` |
+| `/datenschutz/` | `/en/privacy/` |
+
+**Getränkekarte:** Die englische Karte baut sich aus derselben
+`js/menu-data.js` wie die deutsche. Preise und Ausblenden also nur
+**einmal** ändern. Die Übersetzung der Zutaten und Kategorien steht in
+`js/menu-en.js` als kleines Wörterbuch. Taucht bei einem neuen Drink eine
+Zutat auf, die dort fehlt, erscheint sie auf Englisch einfach auf Deutsch.
+Dann eine Zeile ergänzen, z. B.:
+
+```js
+"Holunder": "elderflower",
+```
+
+Die PDF-Karte gibt es nur auf Deutsch, die englische Seite weist darauf hin.
+
 ## Kurzübersicht
 
 | Ich möchte … | … ändere |
@@ -346,4 +357,5 @@ Beim Hoster darauf achten:
 | Text einer Seite ändern | die jeweilige `index.html` |
 | Foto austauschen | Datei in `assets/img/` ersetzen |
 | Farben ändern | `css/style.css` |
+| Neue Zutat auf Englisch | `js/menu-en.js` |
 | Neue Seite | neuer Ordner + `sitemap.xml` |
