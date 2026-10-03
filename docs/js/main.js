@@ -60,55 +60,6 @@
     return node;
   }
 
-  var toggleTheme = document.querySelector(".theme-toggle");
-  var metaTheme = document.getElementById("meta-theme");
-
-  function themeAnwenden(theme, speichern) {
-    var dunkel = theme === "dark";
-    if (dunkel) {
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else {
-      document.documentElement.removeAttribute("data-theme");
-    }
-    if (toggleTheme) {
-      toggleTheme.setAttribute("aria-pressed", dunkel ? "true" : "false");
-      toggleTheme.setAttribute("aria-label",
-        dunkel ? "Helles Design einschalten" : "Dunkles Design einschalten");
-    }
-    if (metaTheme) metaTheme.setAttribute("content", dunkel ? "#0d0407" : "#340810");
-    if (speichern) {
-      try { localStorage.setItem("kb-theme", theme); } catch (e) { }
-    }
-  }
-
-  themeAnwenden(document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "wein", false);
-
-  if (toggleTheme) {
-    toggleTheme.addEventListener("click", function () {
-      var dunkel = document.documentElement.getAttribute("data-theme") === "dark";
-      var wechseln = function () { themeAnwenden(dunkel ? "wein" : "dark", true); };
-      if (document.startViewTransition && !reduzierteBewegung) {
-        var r = toggleTheme.getBoundingClientRect();
-        document.documentElement.style.setProperty("--vt-x", (r.left + r.width / 2) + "px");
-        document.documentElement.style.setProperty("--vt-y", (r.top + r.height / 2) + "px");
-        document.startViewTransition(wechseln);
-      } else {
-        wechseln();
-      }
-    });
-  }
-
-  if (window.matchMedia) {
-    var systemDunkel = window.matchMedia("(prefers-color-scheme: dark)");
-    var aufSystem = function (e) {
-      var gespeichert;
-      try { gespeichert = localStorage.getItem("kb-theme"); } catch (err) { gespeichert = null; }
-      if (!gespeichert) themeAnwenden(e.matches ? "dark" : "wein", false);
-    };
-    if (systemDunkel.addEventListener) systemDunkel.addEventListener("change", aufSystem);
-    else if (systemDunkel.addListener) systemDunkel.addListener(aufSystem);
-  }
-
   var menuRoot = document.getElementById("menu-root");
   var menuNav = document.getElementById("menu-nav");
 
@@ -878,4 +829,57 @@
       Array.prototype.forEach.call(document.querySelectorAll(".ue-knopf"), function (k) { k.remove(); });
     }
   });
+})();
+
+(function () {
+  "use strict";
+
+  var root = document.documentElement;
+  var body = document.body;
+  var wenigBewegung = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var schleier = document.createElement("div");
+  schleier.className = "nav-schleier";
+  schleier.setAttribute("aria-hidden", "true");
+  body.appendChild(schleier);
+  schleier.addEventListener("click", function () {
+    var knopf = document.querySelector(".nav-toggle");
+    if (knopf && body.classList.contains("nav-offen")) knopf.click();
+  });
+
+  var pfeil = document.createElement("button");
+  pfeil.type = "button";
+  pfeil.className = "scroll-pfeil";
+  pfeil.setAttribute("aria-label", "Weiter nach unten");
+  pfeil.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg>';
+  body.appendChild(pfeil);
+
+  var WARTEZEIT = 7000;
+  var timer;
+
+  var amEnde = function () {
+    return window.scrollY + window.innerHeight >= root.scrollHeight - 160;
+  };
+  var blockiert = function () {
+    return (root.classList.contains("mit-intro") && !root.classList.contains("intro-fertig")) ||
+      body.classList.contains("nav-offen") || !!document.querySelector("dialog[open]");
+  };
+  var zeigen = function () {
+    if (blockiert()) { timer = setTimeout(zeigen, 2000); return; }
+    if (!amEnde()) pfeil.classList.add("sichtbar");
+  };
+  var aktivitaet = function () {
+    pfeil.classList.remove("sichtbar");
+    clearTimeout(timer);
+    timer = setTimeout(zeigen, WARTEZEIT);
+  };
+
+  ["scroll", "wheel", "touchstart", "touchmove", "pointerdown", "mousemove", "keydown"].forEach(function (name) {
+    window.addEventListener(name, aktivitaet, { passive: true });
+  });
+  pfeil.addEventListener("pointerdown", function (e) { e.stopPropagation(); });
+  pfeil.addEventListener("click", function () {
+    window.scrollBy({ top: Math.round(window.innerHeight * 0.85), behavior: wenigBewegung ? "auto" : "smooth" });
+  });
+  timer = setTimeout(zeigen, WARTEZEIT);
 })();
