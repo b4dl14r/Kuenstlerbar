@@ -2124,3 +2124,28 @@ html[data-theme="dark"] .btn-gold { --glow: rgba(227, 189, 122, .36); }
 @media (prefers-reduced-motion: reduce) {
   .btn-gold::after { display: block; }
 }
+
+.ue-knopf {
+  position: fixed;
+  z-index: 400;
+  pointer-events: none;
+  background: var(--bg-tief);
+  box-shadow: 0 0 0 1px rgba(227, 189, 122, .6), 0 0 40px rgba(227, 189, 122, .35);
+  transition: top .6s cubic-bezier(.7, 0, .2, 1), left .6s cubic-bezier(.7, 0, .2, 1),
+              width .6s cubic-bezier(.7, 0, .2, 1), height .6s cubic-bezier(.7, 0, .2, 1),
+              border-radius .6s cubic-bezier(.7, 0, .2, 1), box-shadow .6s ease;
+}
+.ue-ankunft { display: none; }
+html.ue-ankunft-knopf .ue-ankunft {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  pointer-events: none;
+  background: var(--bg-tief);
+  transition: opacity .55s ease .05s;
+}
+html.ue-ankunft-knopf .ue-ankunft.weg { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .ue-knopf, .ue-ankunft { display: none !important; }
+}

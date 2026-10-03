@@ -4,6 +4,22 @@
   <meta charset="UTF-8">
   <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        var r = document.referrer.split("#")[0].split("?")[0].replace(/index\.html$/, "");
+        var start = location.protocol + "//" + location.host + "/";
+        if (r === start && !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+          document.documentElement.classList.add("ue-ankunft-knopf");
+        }
+      } catch (e) { }
+    })();
+  </script>
+  <style>
+    .ue-ankunft { display: none; }
+    html.ue-ankunft-knopf .ue-ankunft { display: block; position: fixed; inset: 0; z-index: 400; background: #23050a; }
+    html.ue-ankunft-knopf[data-theme="dark"] .ue-ankunft { background: #070203; }
+  </style>
   <title>Getränkekarte – Cocktails, Longdrinks &amp; Wein · Künstlerbar Chemnitz</title>
   <meta name="description" content="Alle Cocktails, Longdrinks, Shots, Bier und Wein der Künstlerbar Chemnitz mit Zutaten und Preisen. Auch als PDF.">
   <link rel="canonical" href="https://kuenstlerbar.de/getraenkekarte/">
@@ -34,8 +50,8 @@
 
   <link rel="preload" as="font" type="font/woff2" href="/Kuenstlerbar/assets/fonts/Jost-300.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="/Kuenstlerbar/assets/fonts/CormorantGaramond-500.woff2" crossorigin>
-  <link rel="stylesheet" href="/Kuenstlerbar/css/fonts.css?v=5.12">
-  <link rel="stylesheet" href="/Kuenstlerbar/css/style.css?v=5.12">
+  <link rel="stylesheet" href="/Kuenstlerbar/css/fonts.css?v=5.13">
+  <link rel="stylesheet" href="/Kuenstlerbar/css/style.css?v=5.13">
 
   <script type="application/ld+json">
   {
@@ -1360,6 +1376,7 @@
 </head>
 <body>
   <div class="ue-ankunft ue-fluessig" aria-hidden="true"></div>
+  <div class="ue-ankunft" aria-hidden="true"></div>
   <span id="top" aria-hidden="true"></span>
   <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
 
@@ -1569,8 +1586,8 @@
     </form>
   </dialog>
 
-  <script src="/Kuenstlerbar/js/menu-data.js?v=5.12"></script>
-  <script src="/Kuenstlerbar/js/main.js?v=5.12"></script>
+  <script src="/Kuenstlerbar/js/menu-data.js?v=5.13"></script>
+  <script src="/Kuenstlerbar/js/main.js?v=5.13"></script>
   <script src="/Kuenstlerbar/js/uebergang.js?v=1"></script>
 </body>
 </html>

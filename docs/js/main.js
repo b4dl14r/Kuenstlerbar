@@ -775,3 +775,55 @@
     knopf.addEventListener("pointercancel", aus);
   });
 })();
+
+(function () {
+  "use strict";
+
+  var root = document.documentElement;
+  var wenigBewegung = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var ankunft = document.querySelector(".ue-ankunft");
+  if (ankunft && root.classList.contains("ue-ankunft-knopf")) {
+    var weg = function () {
+      ankunft.classList.add("weg");
+      setTimeout(function () { ankunft.remove(); }, 800);
+    };
+    if (document.readyState === "complete") setTimeout(weg, 120);
+    else window.addEventListener("load", function () { setTimeout(weg, 120); });
+    setTimeout(weg, 2500);
+  }
+
+  var pfad = location.pathname.replace(/index\.html$/, "");
+  if (pfad !== "/" || wenigBewegung) return;
+
+  Array.prototype.forEach.call(document.querySelectorAll('a.btn[href="/getraenkekarte/"]'), function (link) {
+    link.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      var r = link.getBoundingClientRect();
+      var k = document.createElement("div");
+      k.className = "ue-knopf";
+      k.setAttribute("aria-hidden", "true");
+      k.style.top = r.top + "px";
+      k.style.left = r.left + "px";
+      k.style.width = r.width + "px";
+      k.style.height = r.height + "px";
+      k.style.borderRadius = getComputedStyle(link).borderRadius;
+      document.body.appendChild(k);
+      void k.offsetWidth;
+      k.style.top = "0px";
+      k.style.left = "0px";
+      k.style.width = "100vw";
+      k.style.height = "100vh";
+      k.style.borderRadius = "0px";
+      k.style.boxShadow = "0 0 0 0 rgba(227, 189, 122, 0)";
+      setTimeout(function () { location.href = link.href; }, 640);
+    });
+  });
+
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted) {
+      Array.prototype.forEach.call(document.querySelectorAll(".ue-knopf"), function (k) { k.remove(); });
+    }
+  });
+})();
