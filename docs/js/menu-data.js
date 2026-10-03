@@ -108,7 +108,7 @@ const KARTE = [
       { name: "Exotic Fruit", zutaten: "Banane, Mango, Ananas, Himbeersirup", preis: "8,00" },
       { name: "Nojito", zutaten: "Limette, Ginger Ale, Minze, Rohrzucker", preis: "8,50" },
       { name: "Virgin Coconut Pine Reserve", zutaten: "Kokosnusspüree, Ananas, Drachenfrucht", preis: "9,50" },
-      { name: "Virgin Pearfection", zutaten: "Birnenpüree, Agave, Mango, Limette", preis: "9,00" },
+      { name: "Virgin Pearfection", zutaten: "Birnenpüree, Agave, Mango, Limette", preis: "9,00", aus: true },
       { name: "Cucumber Cooler", zutaten: "Gurke, Agave, Soda, Minze, Zitrone", preis: "8,00" },
       { name: "Blueberry Lavender", zutaten: "Blaubeerpüree, Lavendel, Zitrone", preis: "9,00" },
       { name: "Lady Maison", zutaten: "Drachenfrucht, Lycheepüree, Zitrone", preis: "9,00" }
