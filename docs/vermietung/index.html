@@ -4,6 +4,22 @@
   <meta charset="UTF-8">
   <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        var r = document.referrer.split("#")[0].split("?")[0].replace(/index\.html$/, "");
+        var start = location.protocol + "//" + location.host + "/";
+        if (r === start && !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+          document.documentElement.classList.add("ue-ankunft-knopf");
+        }
+      } catch (e) { }
+    })();
+  </script>
+  <style>
+    .ue-ankunft { display: none; }
+    html.ue-ankunft-knopf .ue-ankunft { display: block; position: fixed; inset: 0; z-index: 400; background: #23050a; }
+    html.ue-ankunft-knopf[data-theme="dark"] .ue-ankunft { background: #070203; }
+  </style>
   <title>Bar mieten in Chemnitz – Künstlerbar für geschlossene Gesellschaften</title>
   <meta name="description" content="Montags und dienstags exklusiv für euch: Firmenfeiern, Tastings, private Feiern. Künstlerbar auf der Hartmannstraße, 299 € Raummiete inkl. MwSt.">
   <link rel="canonical" href="https://kuenstlerbar.de/vermietung/">
@@ -35,8 +51,8 @@
 
   <link rel="preload" as="font" type="font/woff2" href="/Kuenstlerbar/assets/fonts/Jost-300.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="/Kuenstlerbar/assets/fonts/CormorantGaramond-500.woff2" crossorigin>
-  <link rel="stylesheet" href="/Kuenstlerbar/css/fonts.css?v=5.13">
-  <link rel="stylesheet" href="/Kuenstlerbar/css/style.css?v=5.13">
+  <link rel="stylesheet" href="/Kuenstlerbar/css/fonts.css?v=5.14">
+  <link rel="stylesheet" href="/Kuenstlerbar/css/style.css?v=5.14">
 
   <script type="application/ld+json">
   {
@@ -242,6 +258,7 @@
   </noscript>
 </head>
 <body>
+  <div class="ue-ankunft" aria-hidden="true"></div>
   <span id="top" aria-hidden="true"></span>
   <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
 
@@ -618,6 +635,6 @@
     </form>
   </dialog>
 
-  <script src="/Kuenstlerbar/js/main.js?v=5.13"></script>
+  <script src="/Kuenstlerbar/js/main.js?v=5.14"></script>
 </body>
 </html>

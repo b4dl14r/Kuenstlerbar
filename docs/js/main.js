@@ -634,8 +634,55 @@
       if (feldDatum) datumGrenzeSetzen();
 
       dialog.showModal();
+      morphen(knopf, false);
       var erstes = dialog.querySelector("select, input");
-      if (erstes) erstes.focus();
+      if (erstes) erstes.focus({ preventScroll: true });
+    };
+
+    var wenigBewegung = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var schliesstGerade = false;
+
+    var morphen = function (knopf, rueckwaerts, fertig) {
+      if (wenigBewegung || !knopf || !dialog.animate) { if (fertig) fertig(); return; }
+      var b = knopf.getBoundingClientRect();
+      if (!b.width || b.bottom < 0 || b.top > window.innerHeight) { if (fertig) fertig(); return; }
+      var d = dialog.getBoundingClientRect();
+      var sx = b.width / d.width;
+      var sy = b.height / d.height;
+      var dx = (b.left + b.width / 2) - (d.left + d.width / 2);
+      var dy = (b.top + b.height / 2) - (d.top + d.height / 2);
+      var r = Math.min(b.height / 2, parseFloat(getComputedStyle(knopf).borderTopLeftRadius) || 0);
+      var radiusZiel = getComputedStyle(dialog).borderTopLeftRadius;
+      var klein = {
+        transform: "translate(" + dx + "px, " + dy + "px) scale(" + sx + ", " + sy + ")",
+        borderRadius: (r / sx) + "px / " + (r / sy) + "px"
+      };
+      var gross = { transform: "none", borderRadius: radiusZiel };
+      var dauer = rueckwaerts ? 420 : 560;
+      var a = dialog.animate(rueckwaerts ? [gross, klein] : [klein, gross],
+        { duration: dauer, easing: "cubic-bezier(.7, 0, .2, 1)", fill: rueckwaerts ? "forwards" : "none" });
+      Array.prototype.forEach.call(dialog.children, function (kind) {
+        kind.animate(rueckwaerts
+          ? [{ opacity: 1 }, { opacity: 0, offset: .35 }, { opacity: 0 }]
+          : [{ opacity: 0 }, { opacity: 0, offset: .72 }, { opacity: 1 }],
+          { duration: dauer, easing: "ease", fill: rueckwaerts ? "forwards" : "none" });
+      });
+      if (fertig) a.onfinish = function () {
+        fertig();
+        a.cancel();
+        Array.prototype.forEach.call(dialog.children, function (kind) {
+          kind.getAnimations().forEach(function (x) { x.cancel(); });
+        });
+      };
+    };
+
+    var schliessen = function () {
+      if (schliesstGerade || !dialog.open) return;
+      schliesstGerade = true;
+      morphen(letzterKnopf, true, function () {
+        dialog.close();
+        schliesstGerade = false;
+      });
     };
 
     Array.prototype.forEach.call(anfrageKnoepfe, function (knopf) {
@@ -645,7 +692,12 @@
       });
     });
 
-    if (zuKnopf) zuKnopf.addEventListener("click", function () { dialog.close(); });
+    if (zuKnopf) zuKnopf.addEventListener("click", schliessen);
+    dialog.addEventListener("cancel", function (e) { e.preventDefault(); schliessen(); });
+    dialog.addEventListener("click", function (e) { if (e.target === dialog) {
+      var d = dialog.getBoundingClientRect();
+      if (e.clientX < d.left || e.clientX > d.right || e.clientY < d.top || e.clientY > d.bottom) schliessen();
+    } });
     dialog.addEventListener("close", function () {
       if (letzterKnopf && letzterKnopf.focus) letzterKnopf.focus();
     });
@@ -796,7 +848,7 @@
   var pfad = location.pathname.replace(/index\.html$/, "");
   if (pfad !== "/" || wenigBewegung) return;
 
-  Array.prototype.forEach.call(document.querySelectorAll('a.btn[href="/getraenkekarte/"]'), function (link) {
+  Array.prototype.forEach.call(document.querySelectorAll('a.btn[href="/getraenkekarte/"], a.gruppen-karte[href]'), function (link) {
     link.addEventListener("click", function (e) {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
       e.preventDefault();

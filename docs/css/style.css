@@ -2149,3 +2149,9 @@ html.ue-ankunft-knopf .ue-ankunft.weg { opacity: 0; }
 @media (prefers-reduced-motion: reduce) {
   .ue-knopf, .ue-ankunft { display: none !important; }
 }
+
+.anfrage-dialog[open]::backdrop { animation: dialog-hinter .45s ease; }
+@keyframes dialog-hinter { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .anfrage-dialog[open]::backdrop { animation: none; }
+}
