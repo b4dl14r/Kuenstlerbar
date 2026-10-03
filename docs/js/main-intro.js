@@ -10,10 +10,40 @@
     var ersterWurfFertig = false;
     var weg = false;
 
+    // Das Logo des Ladescreens gleitet an seinen Platz im Hero.
+    var landen = function () {
+      var logo = intro.querySelector(".intro-logo");
+      var ziel = document.querySelector(".hero-logo");
+      if (!logo || !ziel || !logo.animate) return 0;
+      var r = logo.getBoundingClientRect();
+      ziel.style.animation = "none";
+      var z = ziel.getBoundingClientRect();
+      if (z.bottom < 0 || z.top > window.innerHeight || !r.width) {
+        ziel.style.animation = "";
+        return 0;
+      }
+      ziel.style.opacity = "0";
+      var dx = z.left + z.width / 2 - (r.left + r.width / 2);
+      var dy = z.top + z.height / 2 - (r.top + r.height / 2);
+      logo.animate([{ transform: "none" }, { transform: "translate(" + dx + "px," + dy + "px) scale(" + (z.width / r.width) + ")" }],
+        { duration: 950, easing: "cubic-bezier(.65, 0, .35, 1)", fill: "forwards" });
+      intro.animate([{ backgroundColor: getComputedStyle(intro).backgroundColor }, { backgroundColor: "rgba(0, 0, 0, 0)" }],
+        { duration: 800, delay: 150, easing: "ease", fill: "forwards" });
+      var kopf = document.querySelector(".site-header");
+      if (kopf) kopf.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600, delay: 500, easing: "ease", fill: "backwards" });
+      setTimeout(function () { ziel.style.opacity = "1"; }, 950);
+      return 980;
+    };
+
     var raus = function () {
       if (weg) return;
       weg = true;
       var dauer = window.introAusgang(intro, root);
+      if (!dauer) {
+        intro.classList.add("raus");
+        dauer = 820;
+      }
+      root.classList.add("intro-los");
       setTimeout(function () {
         root.classList.remove("mit-intro");
         root.classList.add("intro-fertig");
