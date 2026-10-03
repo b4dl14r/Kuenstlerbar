@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="de" data-ausgang="landen" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      var r = document.documentElement;
+      try {
+        var nav = window.performance && performance.getEntriesByType ? performance.getEntriesByType("navigation")[0] : null;
+        var art = nav ? nav.type : (performance.navigation && performance.navigation.type === 1 ? "reload" : "navigate");
+        var vonHier = document.referrer.indexOf(location.protocol + "//" + location.host + "/") === 0;
+        var zeigen = true;
+        if (zeigen && !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+          r.classList.add("mit-intro");
+          setTimeout(function () { r.classList.remove("mit-intro"); }, 13000);
+        }
+      } catch (e) { }
+    })();
+  </script>
+  <style>
+    .intro { display: none; }
+    html.mit-intro .intro { position: fixed; inset: 0; z-index: 300; display: grid; place-items: center; background: #23050a; }
+    .intro-logo { width: min(58vw, 300px); height: auto; fill: url(#intro-gold); }
+  </style>
+  <title>Künstlerbar Chemnitz. Cocktails mitten in der Stadt</title>
+  <meta name="description" content="Die Künstlerbar auf der Hartmannstraße 7D in Chemnitz. Handgemachte Cocktails, Mocktails und hausgemachte Limonaden. Mittwoch bis Samstag ab 19 Uhr.">
+  <link rel="canonical" href="https://kuenstlerbar.de/">
+
+  <meta property="og:type" content="business.business">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:site_name" content="Künstlerbar Chemnitz">
+  <meta property="og:url" content="https://kuenstlerbar.de/">
+  <meta property="og:title" content="Künstlerbar Chemnitz. Cocktails mitten in der Stadt">
+  <meta property="og:description" content="Handgemachte Cocktails mitten in Chemnitz. Mittwoch und Donnerstag 19 bis 1 Uhr, Freitag und Samstag 19 bis 3 Uhr.">
+  <meta property="og:image" content="https://kuenstlerbar.de/assets/img/og-kuenstlerbar.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Der geschwungene Tresen der Künstlerbar mit beleuchtetem Flaschenregal">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="theme-color" content="#0d0407">
+  <link rel="icon" type="image/png" href="/Kuenstlerbar/assets/img/kuenstlerbar-logo.svg">
+
+  <link rel="preload" as="font" type="font/woff2" href="/Kuenstlerbar/assets/fonts/Jost-300.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/Kuenstlerbar/assets/fonts/CormorantGaramond-500.woff2" crossorigin>
+  <link rel="preload" as="image" href="/Kuenstlerbar/assets/img/hero-bar-panorama.jpg">
+
+  <link rel="stylesheet" href="/Kuenstlerbar/css/fonts.css?v=5.17">
+  <link rel="stylesheet" href="/Kuenstlerbar/css/style.css?v=5.17">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BarOrPub",
+        "@id": "https://kuenstlerbar.de/#bar",
+        "name": "Künstlerbar",
+        "alternateName": "Künstlerbar Chemnitz",
+        "url": "https://kuenstlerbar.de/",
+        "slogan": "Wo der Abend zum Kunstwerk wird.",
+        "description": "Handgemachte Cocktails, Mocktails und hausgemachte Limonaden mitten in Chemnitz. Montags und dienstags für geschlossene Gesellschaften, Tastings und Cocktailkurse buchbar.",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://kuenstlerbar.de/assets/img/kuenstlerbar-logo.png"
+        },
+        "image": [
+          {
+            "@type": "ImageObject",
+            "url": "https://kuenstlerbar.de/assets/img/galerie-tresen.jpg",
+            "width": 1600,
+            "height": 1067,
+            "caption": "Der geschwungene Tresen der Künstlerbar mit beleuchtetem Flaschenregal"
+          },
+          {
+            "@type": "ImageObject",
+            "url": "https://kuenstlerbar.de/assets/img/galerie-flaschenregal.jpg",
+            "width": 640,
+            "height": 427,
+            "caption": "Das beleuchtete Flaschenregal hinter dem Tresen"
+          },
+          {
+            "@type": "ImageObject",
+            "url": "https://kuenstlerbar.de/assets/img/bar-sitzecke.jpg",
+            "width": 640,
+            "height": 853,
+            "caption": "Sitzecke mit Samtbänken und warmem Licht"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Hartmannstraße 7D",
+          "postalCode": "09111",
+          "addressLocality": "Chemnitz",
+          "addressRegion": "Sachsen",
+          "addressCountry": "DE"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 50.8318,
+          "longitude": 12.9265
+        },
+        "hasMap": "https://www.google.com/maps/search/?api=1&query=K%C3%BCnstlerbar%2C+Hartmannstra%C3%9Fe+7D%2C+09111+Chemnitz",
+        "telephone": "+4915562688753",
+        "email": "info.kuenstlerbar@web.de",
+        "priceRange": "€€",
+        "currenciesAccepted": "EUR",
+        "paymentAccepted": "Bargeld, EC-Karte",
+        "publicAccess": true,
+        "isAccessibleForFree": true,
+        "maximumAttendeeCapacity": 60,
+        "founder": {
+          "@type": "Person",
+          "name": "Julian Hahnen"
+        },
+        "amenityFeature": [
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Alkoholfreie Cocktails",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Buchbar für geschlossene Gesellschaften",
+            "value": true
+          }
+        ],
+        "hasMenu": {
+          "@id": "https://kuenstlerbar.de/getraenkekarte/#menu"
+        },
+        "makesOffer": [
+          {
+            "@id": "https://kuenstlerbar.de/vermietung/#service"
+          },
+          {
+            "@id": "https://kuenstlerbar.de/cocktailkurse/#kurs"
+          }
+        ],
+        "potentialAction": {
+          "@type": "ReserveAction",
+          "name": "Tisch telefonisch reservieren",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "tel:+4915562688753",
+            "inLanguage": "de-DE",
+            "actionPlatform": [
+              "http://schema.org/DesktopWebPlatform",
+              "http://schema.org/MobileWebPlatform"
+            ]
+          }
+        },
+        "sameAs": [
+          "https://www.instagram.com/kuenstlerbarchemnitz/"
+        ],
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Wednesday",
+              "Thursday"
+            ],
+            "opens": "19:00",
+            "closes": "01:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Friday",
+              "Saturday"
+            ],
+            "opens": "19:00",
+            "closes": "03:00"
+          }
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://kuenstlerbar.de/#website",
+        "url": "https://kuenstlerbar.de/",
+        "name": "Künstlerbar Chemnitz",
+        "inLanguage": "de-DE",
+        "publisher": {
+          "@id": "https://kuenstlerbar.de/#bar"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://kuenstlerbar.de/#webpage",
+        "url": "https://kuenstlerbar.de/",
+        "name": "Künstlerbar Chemnitz. Cocktails mitten in der Stadt",
+        "description": "Die Künstlerbar auf der Hartmannstraße 7D in Chemnitz. Handgemachte Cocktails, Mocktails und hausgemachte Limonaden.",
+        "inLanguage": "de-DE",
+        "isPartOf": {
+          "@id": "https://kuenstlerbar.de/#website"
+        },
+        "about": {
+          "@id": "https://kuenstlerbar.de/#bar"
+        },
+        "primaryImageOfPage": {
+          "@id": "https://kuenstlerbar.de/assets/img/galerie-tresen.jpg"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <noscript>
+    <style>
+      .reveal, .reveal-item,
+      .hero-inner > * {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        animation: none !important;
+      }
+     
+      .main-nav a.active::after {
+        content: ""; position: absolute; left: 1px; right: 1px; bottom: 4px;
+        height: 1px; background: #e3bd7a;
+      }
+      .menu-root-hinweis { display: block; }
+    </style>
+  </noscript>
+  <link rel="stylesheet" href="/Kuenstlerbar/css/intro-test.css?v=1">
+</head>
+<body>
+  <div class="intro" aria-hidden="true">
+    <svg class="intro-logo" viewBox="0 0 768 768" focusable="false">
+      <defs>
+        <linearGradient id="intro-gold" gradientUnits="userSpaceOnUse" x1="122" y1="-70" x2="646" y2="838">
+          <stop offset="0" stop-color="#f3dda6"/>
+          <stop offset=".3" stop-color="#e3bd7a"/>
+          <stop offset=".62" stop-color="#b8813f"/>
+          <stop offset=".88" stop-color="#e3bd7a"/>
+          <stop offset="1" stop-color="#8f5c26"/>
+        </linearGradient>
+      </defs>
+      <use class="intro-basis" href="/Kuenstlerbar/assets/img/logo-teile.svg#basis"/>
+      <g class="intro-rute">
+        <use href="/Kuenstlerbar/assets/img/logo-teile.svg#rute"/>
+        <g class="intro-fang">
+          <use href="/Kuenstlerbar/assets/img/logo-teile.svg#schnur"/>
+          <use href="/Kuenstlerbar/assets/img/logo-teile.svg#olive"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <span id="top" aria-hidden="true"></span>
+
+  <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/Kuenstlerbar/" aria-label="Künstlerbar, zur Startseite">
+        <span class="brand-logo" aria-hidden="true"></span>
+        <span class="brand-word">Künstlerbar</span>
+      </a>
+      <nav class="main-nav" id="hauptnav" aria-label="Hauptnavigation">
+        <span class="nav-indicator" aria-hidden="true"></span>
+        <a href="/Kuenstlerbar/#bar">Die Bar</a>
+        <a href="/Kuenstlerbar/getraenkekarte/" data-spy="karte">Karte</a>
+        <div class="nav-gruppe">
+          <button class="nav-gruppe-knopf" type="button" aria-expanded="false" aria-controls="nav-gruppen" data-spy="gruppen">Vermietung</button>
+          <div class="nav-untermenue" id="nav-gruppen">
+            <a href="/Kuenstlerbar/vermietung/">Bar mieten</a>
+            <a href="/Kuenstlerbar/vermietung/firmenevents/">Firmenfeier</a>
+            <a href="/Kuenstlerbar/cocktailkurse/">Cocktailkurs</a>
+            <a href="/Kuenstlerbar/vermietung/tastings/">Tasting</a>
+            <a href="/Kuenstlerbar/vermietung/zigarrenabende/">Zigarrenabend</a>
+          </div>
+        </div>
+        <a href="/Kuenstlerbar/#galerie">Galerie</a>
+        <a href="/Kuenstlerbar/#kontakt">Kontakt</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="hauptnav">
+        <svg class="menu-toggle-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="mt-kurve" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"/><path d="M7 16 27 16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-schleier" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="hero-logo" role="img" aria-label="Logo der Künstlerbar: Ein Herr sitzt auf einem Martiniglas und angelt eine Perle"></div>
+      <h1 class="hero-title">Wo der Abend zum <em> Kunstwerk </em> wird.</h1>
+      <p class="hero-sub">Warmes Licht, gute Gespräche und Drinks, die wir mit Hingabe
+        von Hand zaubern. Mitten in Chemnitz, auf der Hartmannstraße.</p>
+      <p class="hero-status" id="offen-status" aria-live="polite"></p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="/Kuenstlerbar/getraenkekarte/">Zur Getränkekarte</a>
+        <a class="btn btn-ghost btn-nur-desktop" href="#kontakt">Kontakt und Zeiten</a>
+      </div>
+      <span class="hero-pfeil" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></span>
+    </div>
+  </section>
+
+  <main id="inhalt">
+    <section class="section" id="bar">
+      <div class="wrap split">
+        <div class="split-text reveal">
+          <p class="eyebrow">Die Bar</p>
+          <h2>Unser Wohnzimmer auf der <span class="script-accent">Hartmannstraße</span></h2>
+          <p>Dunkles Holz, warmes Licht und ein Tresen, an dem die Zeit gern
+            etwas langsamer läuft. So haben wir uns die Künstlerbar gebaut.
+            Hier trefft ihr Freunde, kommt mit Fremden ins Gespräch und findet
+            immer einen Platz für ein gutes Glas.</p>
+          <p>Bei den Drinks machen wir keine Kompromisse. Frische Limetten statt
+            Saft aus der Flasche, echte Fruchtpürees und selbst angesetzte
+            Sirups. Jeder Cocktail entsteht bei uns von Hand, vom Espresso
+            Martini bis zu eigenen Kreationen wie dem Tropical Grind.</p>
+          <blockquote class="statement">
+            <p>„Eine Bar ist nur ein Raum aus Wänden und Tresen. Erst durch euch
+              wird sie zu einem lebendigen Ort.“</p>
+            <cite>Julian Hahnen, Inhaber der Künstlerbar</cite>
+          </blockquote>
+        </div>
+        <div class="split-media reveal">
+          <figure class="media-main">
+            <img src="/Kuenstlerbar/assets/img/bar-sitzecke.jpg" width="640" height="853" alt="Gemütliche Sitzecke mit Samtbänken und warmem Licht" loading="lazy">
+          </figure>
+          <figure class="media-small">
+            <img src="/Kuenstlerbar/assets/img/bar-flaschenregal.jpg" width="640" height="853" alt="Flaschenregal mit warmem Licht und barocker Tapete" loading="lazy">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <div class="ornament reveal" aria-hidden="true"></div>
+
+    <section class="section" id="karte">
+      <div class="wrap split">
+        <div class="split-text reveal">
+          <p class="eyebrow">Karte</p>
+          <h2>Cocktails nach <span class="script-accent">deinem Geschmack</span></h2>
+          <p>Bei den Cocktails, Mocktails und Limonaden pressen wir die Limetten
+            selbst, setzen unsere Sirups an und arbeiten mit echtem Fruchtpüree.
+            Wer lieber ein Bier, ein Glas Wein oder eine Cola möchte, bekommt die
+            natürlich genauso.</p>
+          <p>Auf der Karte steht bei jedem Drink, was drin ist und was er kostet.
+            Wir halten sie aktuell, auch wenn mal etwas ausgegangen ist.</p>
+          <div class="hero-actions">
+            <a class="btn btn-gold" href="/Kuenstlerbar/getraenkekarte/">Zur Getränkekarte</a>
+            <a class="btn btn-ghost" href="/Kuenstlerbar/assets/pdf/getraenkekarte.pdf" target="_blank" rel="nofollow noopener">Als PDF</a>
+          </div>
+        </div>
+        <div class="split-media reveal">
+          <figure class="media-main">
+            <img src="/Kuenstlerbar/assets/img/galerie-whiskey-sour.jpg"
+                 srcset="/Kuenstlerbar/assets/img/galerie-whiskey-sour-600.jpg 600w, /Kuenstlerbar/assets/img/galerie-whiskey-sour.jpg 850w"
+                 sizes="(max-width: 900px) 100vw, 460px"
+                 width="850" height="1253"
+                 alt="Whiskey Sour mit Thymianzweig und geröstetem Zitronenzest im geschliffenen Tumbler" loading="lazy">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <div class="ornament reveal" aria-hidden="true"></div>
+
+    <section class="section" id="gruppen">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Montags und dienstags</p>
+          <h2>Die ganze Bar <span class="script-accent">für euch</span></h2>
+          <p class="section-sub">An unseren Ruhetagen gehört die Künstlerbar eurer
+            Runde allein. Sagt uns einfach, was ihr vorhabt, und wir bauen den
+            Abend drum herum.</p>
+        </div>
+        <div class="gruppen-grid reveal-group">
+          <a class="gruppen-karte reveal" href="/Kuenstlerbar/vermietung/">
+            <strong>Bar mieten</strong>
+            <span>Die ganze Bar, unser Barteam dahinter, sonst niemand im Raum.</span>
+            <span class="gruppen-preis">299 € Raummiete</span>
+          </a>
+          <a class="gruppen-karte reveal" href="/Kuenstlerbar/vermietung/firmenevents/">
+            <strong>Firmenfeier</strong>
+            <span>Weihnachtsfeier, Teamabend oder Kundenempfang mitten in Chemnitz.</span>
+            <span class="gruppen-preis">299 € Barmiete plus Verbrauch</span>
+          </a>
+          <a class="gruppen-karte reveal" href="/Kuenstlerbar/cocktailkurse/">
+            <strong>Cocktailkurs</strong>
+            <span>Ihr steht selbst hinter dem Tresen und trinkt, was ihr mixt.</span>
+            <span class="gruppen-preis">59 € pro Person</span>
+          </a>
+          <a class="gruppen-karte reveal" href="/Kuenstlerbar/vermietung/tastings/">
+            <strong>Tasting</strong>
+            <span>Fünf Drinks nacheinander, in Ruhe erklärt und probiert.</span>
+            <span class="gruppen-preis">49 € pro Person</span>
+          </a>
+          <a class="gruppen-karte reveal" href="/Kuenstlerbar/vermietung/zigarrenabende/">
+            <strong>Zigarrenabend</strong>
+            <span>Eine gute Zigarre, zwei passende Drinks, viel Zeit.</span>
+            <span class="gruppen-preis">59 € pro Person</span>
+          </a>
+        </div>
+        <p class="preis-hinweis reveal">Alle Preise inklusive der gesetzlichen
+          Mehrwertsteuer. Die Raummiete gilt pauschal für den Abend, die
+          Programmpreise pro Person, jeweils mit belegten Brötchen und Snackplatte.
+          Getränke darüber hinaus rechnen wir nach Verbrauch zu den Preisen der
+          <a class="inline-link" href="/Kuenstlerbar/getraenkekarte/">Getränkekarte</a> ab.</p>
+        <p class="karte-mehr reveal">
+          <a class="btn btn-gold js-mail js-anfrage" href="#"
+             data-user="info.kuenstlerbar" data-domain="web.de"
+             data-betreff="Anfrage%20geschlossene%20Gesellschaft"
+             data-body="Anlass%3A%0AWunschdatum%3A%0AAnzahl%20Personen%3A%0AUhrzeit%3A%0A%0AName%3A%0ATelefon%20f%C3%BCr%20R%C3%BCckfragen%3A%0A">Anfrage stellen</a>
+        </p>
+      </div>
+    </section>
+
+    <div class="ornament reveal" aria-hidden="true"></div>
+
+    <section class="section" id="galerie">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Einblicke</p>
+          <h2>So sieht es <span class="script-accent">bei uns</span> aus</h2>
+        </div>
+        <div class="gallery reveal-group">
+          <figure class="ga-i1 reveal"><img src="/Kuenstlerbar/assets/img/galerie-flaschenregal.jpg" width="640" height="427" alt="Das beleuchtete Flaschenregal hinter dem Tresen" loading="lazy"></figure>
+          <figure class="ga-g1 reveal"><img src="/Kuenstlerbar/assets/img/galerie-whiskey-sour.jpg" srcset="/Kuenstlerbar/assets/img/galerie-whiskey-sour-600.jpg 600w, /Kuenstlerbar/assets/img/galerie-whiskey-sour.jpg 850w" sizes="(max-width: 720px) 50vw, 280px" width="850" height="1253" alt="Whiskey Sour mit Thymianzweig und geröstetem Zitronenzest im geschliffenen Tumbler" loading="lazy"></figure>
+          <figure class="ga-i3 reveal"><img src="/Kuenstlerbar/assets/img/galerie-fensterplaetze.jpg" width="640" height="853" alt="Fensterplätze mit Barhockern am Abend" loading="lazy"></figure>
+          <figure class="ga-i5 reveal"><img src="/Kuenstlerbar/assets/img/galerie-barmatte.jpg" width="640" height="853" alt="Barmatte und Jigger auf dem Tresen" loading="lazy"></figure>
+          <figure class="ga-b5 reveal"><img src="/Kuenstlerbar/assets/img/galerie-tresen.jpg" srcset="/Kuenstlerbar/assets/img/galerie-tresen-800.jpg 800w, /Kuenstlerbar/assets/img/galerie-tresen.jpg 1600w" sizes="(max-width: 720px) 100vw, 560px" width="1600" height="1067" alt="Der geschwungene Tresen der Künstlerbar mit beleuchtetem Flaschenregal, Sitzecke und Neonschild" loading="lazy"></figure>
+          <figure class="ga-g2 reveal"><img src="/Kuenstlerbar/assets/img/galerie-longdrink-rosa.jpg" srcset="/Kuenstlerbar/assets/img/galerie-longdrink-rosa-600.jpg 600w, /Kuenstlerbar/assets/img/galerie-longdrink-rosa.jpg 841w" sizes="(max-width: 720px) 50vw, 280px" width="841" height="1085" alt="Rosafarbener Longdrink mit Orangenscheibe im Rillenglas auf dem Holztresen" loading="lazy"></figure>
+          <figure class="ga-g4 reveal"><img src="/Kuenstlerbar/assets/img/galerie-barstation.jpg" srcset="/Kuenstlerbar/assets/img/galerie-barstation-600.jpg 600w, /Kuenstlerbar/assets/img/galerie-barstation.jpg 900w" sizes="(max-width: 720px) 50vw, 280px" width="900" height="1350" alt="Barstation mit Jigger und Barlöffel unter den geflochtenen Pendelleuchten, im Hintergrund das Kaminfeuer" loading="lazy"></figure>
+          <figure class="ga-i4 reveal"><img src="/Kuenstlerbar/assets/img/galerie-barkeeper.jpg" width="640" height="853" alt="Unser Barkeeper schenkt einen Drink ein" loading="lazy"></figure>
+          <figure class="ga-g3 reveal"><img src="/Kuenstlerbar/assets/img/galerie-layer-cocktail.jpg" srcset="/Kuenstlerbar/assets/img/galerie-layer-cocktail-600.jpg 600w, /Kuenstlerbar/assets/img/galerie-layer-cocktail.jpg 1200w" sizes="(max-width: 720px) 50vw, 280px" width="1200" height="1600" alt="Geschichteter Cocktail in Blau und Orange in der Coupette mit aufgesetztem Shotglas" loading="lazy"></figure>
+          <figure class="ga-g5 reveal"><img src="/Kuenstlerbar/assets/img/galerie-qr-kerze.jpg" srcset="/Kuenstlerbar/assets/img/galerie-qr-kerze-600.jpg 600w, /Kuenstlerbar/assets/img/galerie-qr-kerze.jpg 900w" sizes="(max-width: 720px) 50vw, 280px" width="900" height="1350" alt="Kerzenlicht, Grünpflanze und die Getränkekarte als QR-Code auf dem Tisch" loading="lazy"></figure>
+        </div>
+        <p class="gallery-cta reveal">Mehr Bilder und alle Neuigkeiten findet ihr auf
+          <a class="inline-link insta-link" href="https://www.instagram.com/kuenstlerbarchemnitz/" target="_blank" rel="noopener">
+            <svg class="icon-insta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.2"/>
+              <circle cx="12" cy="12" r="4.2"/>
+              <circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/>
+            </svg>Instagram</a>
+        </p>
+      </div>
+    </section>
+
+    <div class="ornament reveal" aria-hidden="true"></div>
+
+    <section class="section" id="kontakt">
+      <div class="wrap split split-kontakt">
+        <div class="split-text reveal">
+          <p class="eyebrow">Kontakt</p>
+          <h2>Kommt <span class="script-accent">vorbei</span></h2>
+          <p>Ihr findet uns auf der Hartmannstraße 7D, nur ein paar Schritte vom
+            Karl-Marx-Monument. Für größere Gruppen reserviert ihr am besten
+            telefonisch. Sonst gilt: einfach reinkommen, wir finden ein Plätzchen.</p>
+          <address class="contact-block">
+            <strong>Künstlerbar</strong><br>
+            Hartmannstraße 7D<br>
+            09111 Chemnitz
+          </address>
+
+          <ul class="kanal-liste">
+            <li>
+              <a class="kanal" href="tel:+4915562688753">
+                <span class="kanal-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 3h3.2l1.6 4.2-2 1.6a13.4 13.4 0 0 0 6.4 6.4l1.6-2 4.2 1.6v3.2a2 2 0 0 1-2.2 2A17.8 17.8 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3Z"/></svg>
+                </span>
+                <span class="kanal-text">
+                  <strong>Anrufen und reservieren</strong>
+                  <small>015562 688753 · der schnellste Weg zu eurem Tisch</small>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="kanal" href="https://www.instagram.com/kuenstlerbarchemnitz/" target="_blank" rel="noopener">
+                <span class="kanal-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.2"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg>
+                </span>
+                <span class="kanal-text">
+                  <strong>Nachricht auf Instagram</strong>
+                  <small>@kuenstlerbarchemnitz · wir antworten meist noch am selben Abend</small>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="kanal js-mail" href="#" data-user="info.kuenstlerbar" data-domain="web.de">
+                <span class="kanal-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
+                </span>
+                <span class="kanal-text">
+                  <strong>E-Mail schreiben</strong>
+                  <small><span class="js-mail-text">E-Mail-Adresse anzeigen</span> · für alles, was Zeit hat</small>
+                </span>
+              </a>
+            </li>
+          </ul>
+
+          <p class="contact-links">
+            <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&amp;query=K%C3%BCnstlerbar%2C+Hartmannstra%C3%9Fe+7D%2C+09111+Chemnitz" target="_blank" rel="noopener">Route planen</a>
+          </p>
+        </div>
+        <div class="split-text kontakt-zeiten reveal">
+          <h3>Öffnungszeiten</h3>
+          <table class="hours" aria-label="Öffnungszeiten">
+            <tbody>
+              <tr data-tage="0,1,2"><th scope="row">Sonntag bis Dienstag</th><td>geschlossen</td></tr>
+              <tr data-tage="3,4"><th scope="row">Mittwoch und Donnerstag</th><td>19:00 bis 01:00&nbsp;Uhr</td></tr>
+              <tr data-tage="5,6"><th scope="row">Freitag und Samstag</th><td>19:00 bis 03:00&nbsp;Uhr</td></tr>
+            </tbody>
+          </table>
+
+          <p class="section-sub">Montags und dienstags sind wir für den freien Verkauf
+            geschlossen. Dann könnt ihr die
+            <a class="inline-link" href="/Kuenstlerbar/vermietung/">Bar mieten</a> oder einen
+            <a class="inline-link" href="/Kuenstlerbar/cocktailkurse/">Cocktailkurs</a> buchen.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-logo" aria-hidden="true"></div>
+      <p class="footer-name">Künstlerbar · Hartmannstraße 7D · 09111 Chemnitz</p>
+
+      <nav class="footer-nav" aria-label="Weitere Seiten">
+        <a href="/Kuenstlerbar/getraenkekarte/">Getränkekarte</a>
+        <a href="/Kuenstlerbar/vermietung/">Vermietung</a>
+        <a href="/Kuenstlerbar/cocktailkurse/">Cocktailkurse</a>
+        <a class="insta-link" href="https://www.instagram.com/kuenstlerbarchemnitz/" target="_blank" rel="noopener"><svg class="icon-insta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.2"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg>Instagram</a>
+        <a href="/Kuenstlerbar/impressum/">Impressum</a>
+        <a href="/Kuenstlerbar/datenschutz/">Datenschutz</a>
+      </nav>
+      <p class="footer-note">© <span id="jahr">2026</span> Künstlerbar. Alle Rechte vorbehalten.</p>
+      <p class="footer-love">Made with
+        <svg class="icon-heart" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.4-4.6-10-9.3C.5 8.9 2.2 5 5.9 5c2.2 0 3.6 1.2 4.4 2.5.4.7 1 .7 1.4 0C12.5 6.2 13.9 5 16.1 5c3.7 0 5.4 3.9 3.9 6.7C17.4 16.4 12 21 12 21Z"/></svg>
+        <span class="sr-only">Liebe</span> by
+        <img class="footer-love-logo" src="/Kuenstlerbar/assets/img/macher-logo.png" alt="AL" height="20">
+      </p>
+    </div>
+  </footer>
+
+  <dialog class="anfrage-dialog" id="anfrage-dialog" data-user="info.kuenstlerbar" data-domain="web.de" aria-labelledby="anfrage-titel">
+    <div class="anfrage-kopf">
+      <div>
+        <h2 id="anfrage-titel">Anfrage stellen</h2>
+        <p>Vier Angaben reichen. Wir melden uns meist noch am selben Abend.</p>
+      </div>
+      <button class="anfrage-zu" type="button" aria-label="Fenster schließen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <form class="anfrage-form" method="dialog">
+      <div class="feld">
+        <label for="anfrage-anlass">Worum geht es?</label>
+        <select id="anfrage-anlass" name="anlass">
+          <option>Bar mieten</option>
+          <option>Firmenfeier</option>
+          <option>Cocktailkurs</option>
+          <option>Tasting</option>
+          <option>Zigarrenabend</option>
+          <option>Etwas anderes</option>
+        </select>
+      </div>
+
+      <div class="anfrage-reihe">
+        <div class="feld">
+          <label for="anfrage-datum">Wunschdatum</label>
+          <input type="date" id="anfrage-datum" name="datum" aria-describedby="anfrage-datum-hinweis">
+          <p class="feld-hinweis" id="anfrage-datum-hinweis">Frühestens zwei Wochen ab heute.</p>
+        </div>
+        <div class="feld">
+          <label for="anfrage-uhrzeit">Ab wann</label>
+          <input type="time" id="anfrage-uhrzeit" name="uhrzeit" value="19:00">
+        </div>
+      </div>
+
+      <div class="anfrage-reihe">
+        <div class="feld">
+          <label for="anfrage-personen">Wie viele Personen</label>
+          <input type="number" id="anfrage-personen" name="personen" min="1" max="80" inputmode="numeric" placeholder="z. B. 18">
+        </div>
+        <div class="feld">
+          <label for="anfrage-telefon">Telefon für Rückfragen</label>
+          <input type="tel" id="anfrage-telefon" name="telefon" autocomplete="tel" placeholder="0151 …">
+        </div>
+      </div>
+
+      <div class="feld">
+        <label for="anfrage-name">Name</label>
+        <input type="text" id="anfrage-name" name="name" autocomplete="name" placeholder="Wer fragt an?">
+      </div>
+
+      <div class="feld">
+        <label for="anfrage-nachricht">Noch etwas dazu?</label>
+        <textarea id="anfrage-nachricht" name="nachricht" placeholder="Essen dazu, besondere Wünsche, offene Fragen …"></textarea>
+      </div>
+
+      <div class="anfrage-aktionen">
+        <button class="btn btn-gold" type="submit">Anfrage als Mail öffnen</button>
+        <a class="btn btn-ghost" href="tel:+4915562688753">Lieber anrufen</a>
+        <p class="anfrage-hinweis">Es öffnet sich euer Mailprogramm mit den Angaben. Erst wenn ihr dort auf Senden tippt, geht die Anfrage raus.</p>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/Kuenstlerbar/js/intro-test.js?v=1"></script>
+  <script src="/Kuenstlerbar/js/main-intro.js?v=1"></script>
+  <div class="intro-testleiste"><span>2 · Logo landet im Hero</span><a href="/Kuenstlerbar/intro/">Alle</a><button type="button" onclick="scrollTo(0,0);location.reload()">Nochmal</button></div>
+</body>
+</html>
