@@ -830,14 +830,10 @@
     }
   });
 })();
-
 (function () {
   "use strict";
 
-  var root = document.documentElement;
   var body = document.body;
-  var wenigBewegung = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-
   var schleier = document.createElement("div");
   schleier.className = "nav-schleier";
   schleier.setAttribute("aria-hidden", "true");
@@ -846,35 +842,4 @@
     var knopf = document.querySelector(".nav-toggle");
     if (knopf && body.classList.contains("nav-offen")) knopf.click();
   });
-
-  var pfeil = document.createElement("div");
-  pfeil.className = "scroll-pfeil";
-  pfeil.setAttribute("aria-hidden", "true");
-  pfeil.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg>';
-  body.appendChild(pfeil);
-
-  var WARTEZEIT = 5000;
-  var timer;
-
-  var amEnde = function () {
-    return window.scrollY + window.innerHeight >= root.scrollHeight - 160;
-  };
-  var blockiert = function () {
-    return (root.classList.contains("mit-intro") && !root.classList.contains("intro-fertig")) ||
-      body.classList.contains("nav-offen") || !!document.querySelector("dialog[open]");
-  };
-  var zeigen = function () {
-    if (blockiert()) { timer = setTimeout(zeigen, 2000); return; }
-    if (!amEnde()) pfeil.classList.add("sichtbar");
-  };
-  var gescrollt = function () {
-    pfeil.classList.remove("sichtbar");
-    clearTimeout(timer);
-    timer = setTimeout(zeigen, WARTEZEIT);
-  };
-
-  ["scroll", "wheel", "touchmove"].forEach(function (name) {
-    window.addEventListener(name, gescrollt, { passive: true });
-  });
-  timer = setTimeout(zeigen, WARTEZEIT);
 })();
