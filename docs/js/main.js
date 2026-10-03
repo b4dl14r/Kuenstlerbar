@@ -847,14 +847,13 @@
     if (knopf && body.classList.contains("nav-offen")) knopf.click();
   });
 
-  var pfeil = document.createElement("button");
-  pfeil.type = "button";
+  var pfeil = document.createElement("div");
   pfeil.className = "scroll-pfeil";
-  pfeil.setAttribute("aria-label", "Weiter nach unten");
+  pfeil.setAttribute("aria-hidden", "true");
   pfeil.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg>';
   body.appendChild(pfeil);
 
-  var WARTEZEIT = 7000;
+  var WARTEZEIT = 5000;
   var timer;
 
   var amEnde = function () {
@@ -868,18 +867,14 @@
     if (blockiert()) { timer = setTimeout(zeigen, 2000); return; }
     if (!amEnde()) pfeil.classList.add("sichtbar");
   };
-  var aktivitaet = function () {
+  var gescrollt = function () {
     pfeil.classList.remove("sichtbar");
     clearTimeout(timer);
     timer = setTimeout(zeigen, WARTEZEIT);
   };
 
-  ["scroll", "wheel", "touchstart", "touchmove", "pointerdown", "mousemove", "keydown"].forEach(function (name) {
-    window.addEventListener(name, aktivitaet, { passive: true });
-  });
-  pfeil.addEventListener("pointerdown", function (e) { e.stopPropagation(); });
-  pfeil.addEventListener("click", function () {
-    window.scrollBy({ top: Math.round(window.innerHeight * 0.85), behavior: wenigBewegung ? "auto" : "smooth" });
+  ["scroll", "wheel", "touchmove"].forEach(function (name) {
+    window.addEventListener(name, gescrollt, { passive: true });
   });
   timer = setTimeout(zeigen, WARTEZEIT);
 })();
