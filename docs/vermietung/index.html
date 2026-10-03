@@ -7,42 +7,37 @@
   <title>Bar mieten in Chemnitz – Künstlerbar für geschlossene Gesellschaften</title>
   <meta name="description" content="Montags und dienstags exklusiv für euch: Firmenfeiern, Tastings, private Feiern. Künstlerbar auf der Hartmannstraße, 299 € Raummiete inkl. MwSt.">
   <link rel="canonical" href="https://kuenstlerbar.de/vermietung/">
-  <link rel="alternate" hreflang="de" href="https://kuenstlerbar.de/vermietung/">
-  <link rel="alternate" hreflang="en" href="https://kuenstlerbar.de/en/private-hire/">
-  <link rel="alternate" hreflang="x-default" href="https://kuenstlerbar.de/vermietung/">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
-  <meta property="og:locale:alternate" content="en_GB">
   <meta property="og:site_name" content="Künstlerbar Chemnitz">
   <meta property="og:url" content="https://kuenstlerbar.de/vermietung/">
   <meta property="og:title" content="Bar mieten in Chemnitz – Künstlerbar für geschlossene Gesellschaften">
   <meta property="og:description" content="Montags und dienstags gehört die Künstlerbar eurer Runde allein. Mit eigenem Barteam, mitten in Chemnitz.">
-  <meta property="og:image" content="https://kuenstlerbar.de/assets/img/og-kuenstlerbar.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image" content="https://kuenstlerbar.de/assets/img/vermietung-tafel.jpg">
+  <meta property="og:image:width" content="1264">
+  <meta property="og:image:height" content="1896">
+  <meta property="og:image:alt" content="Hochtische mit Samtstühlen an der Fensterfront der Künstlerbar">
   <meta name="twitter:card" content="summary_large_image">
 
-  <meta name="theme-color" content="#000000">
-  <link rel="icon" type="image/svg+xml" href="/Kuenstlerbar/assets/img/kuenstlerbar-logo.svg">
+  <meta name="theme-color" id="meta-theme" content="#340810">
   <link rel="icon" type="image/png" href="/Kuenstlerbar/assets/img/kuenstlerbar-logo.png">
 
   <script>
     (function () {
-      var r = document.documentElement;
       try {
-        if (!sessionStorage.getItem("kb-intro") &&
-            !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
-          r.classList.add("mit-intro");
-          setTimeout(function () { r.classList.remove("mit-intro"); }, 13000);
-        }
-      } catch (e) { }
+        var t = localStorage.getItem("kb-theme");
+        if (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) t = "dark";
+        if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
+      } catch (e) {  }
     })();
   </script>
 
-  <link rel="preload" as="font" type="font/woff2" href="/Kuenstlerbar/assets/fonts/BodoniModa-var.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="/Kuenstlerbar/assets/fonts/HankenGrotesk-var.woff2" crossorigin>
-  <link rel="stylesheet" href="/Kuenstlerbar/css/style.css">
+  <link rel="preload" as="font" type="font/woff2" href="/Kuenstlerbar/assets/fonts/Jost-300.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/Kuenstlerbar/assets/fonts/CormorantGaramond-500.woff2" crossorigin>
+  <link rel="stylesheet" href="/Kuenstlerbar/css/fonts.css?v=5.12">
+  <link rel="stylesheet" href="/Kuenstlerbar/css/style.css?v=5.12">
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -238,26 +233,16 @@
 
   <noscript>
     <style>
-      .reveal { opacity: 1 !important; transform: none !important; }
-      [data-fx="vorhang"] img { clip-path: none !important; }
-      [data-fx] img { transform: none !important; }
+      .reveal, .reveal-item { opacity: 1 !important; animation: none !important; }
+      .main-nav a.active::after {
+        content: ""; position: absolute; left: 1px; right: 1px; bottom: 4px;
+        height: 1px; background: #e3bd7a;
+      }
     </style>
   </noscript>
 </head>
 <body>
-  <div class="intro" aria-hidden="true">
-    <svg class="intro-logo" viewBox="0 0 768 768" focusable="false">
-      <use class="intro-basis" href="/Kuenstlerbar/assets/img/logo-teile.svg#basis"/>
-      <g class="intro-rute">
-        <use href="/Kuenstlerbar/assets/img/logo-teile.svg#rute"/>
-        <g class="intro-fang">
-          <use href="/Kuenstlerbar/assets/img/logo-teile.svg#schnur"/>
-          <use href="/Kuenstlerbar/assets/img/logo-teile.svg#olive"/>
-        </g>
-      </g>
-    </svg>
-  </div>
-
+  <span id="top" aria-hidden="true"></span>
   <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
 
   <header class="site-header">
@@ -267,72 +252,62 @@
         <span class="brand-word">Künstlerbar</span>
       </a>
       <nav class="main-nav" id="hauptnav" aria-label="Hauptnavigation">
+        <span class="nav-indicator" aria-hidden="true"></span>
         <a href="/Kuenstlerbar/#bar">Die Bar</a>
         <a href="/Kuenstlerbar/getraenkekarte/" data-spy="karte">Karte</a>
         <div class="nav-gruppe">
           <button class="nav-gruppe-knopf" type="button" aria-expanded="false" aria-controls="nav-gruppen" data-spy="gruppen">Vermietung</button>
           <div class="nav-untermenue" id="nav-gruppen">
-            <div>
-              <a href="/Kuenstlerbar/vermietung/">Bar mieten</a>
-              <a href="/Kuenstlerbar/vermietung/firmenevents/">Firmenfeier</a>
-              <a href="/Kuenstlerbar/cocktailkurse/">Cocktailkurs</a>
-              <a href="/Kuenstlerbar/vermietung/tastings/">Tasting</a>
-              <a href="/Kuenstlerbar/vermietung/zigarrenabende/">Zigarrenabend</a>
-            </div>
+            <a href="/Kuenstlerbar/vermietung/">Bar mieten</a>
+            <a href="/Kuenstlerbar/vermietung/firmenevents/">Firmenfeier</a>
+            <a href="/Kuenstlerbar/cocktailkurse/">Cocktailkurs</a>
+            <a href="/Kuenstlerbar/vermietung/tastings/">Tasting</a>
+            <a href="/Kuenstlerbar/vermietung/zigarrenabende/">Zigarrenabend</a>
           </div>
         </div>
         <a href="/Kuenstlerbar/#galerie">Galerie</a>
         <a href="/Kuenstlerbar/#kontakt">Kontakt</a>
-        <div class="sprache" role="group" aria-label="Sprache">
-          <a href="/Kuenstlerbar/vermietung/" lang="de" hreflang="de" aria-current="true">DE</a>
-          <span class="sprache-trenner" aria-hidden="true">/</span>
-          <a href="/Kuenstlerbar/en/private-hire/" lang="en" hreflang="en">EN</a>
-        </div>
       </nav>
-      <button class="nav-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="hauptnav">
+      <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="hauptnav">
         <svg class="menu-toggle-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="mt-kurve" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"/><path d="M7 16 27 16"/></svg>
       </button>
     </div>
   </header>
 
   <main id="inhalt">
-    <header class="seitenkopf">
-      <figure class="bild seitenkopf-bild" data-fx="zoom">
-              <img src="/Kuenstlerbar/assets/img/vermietung-tafel.jpg"
-                 srcset="/Kuenstlerbar/assets/img/vermietung-tafel-760.jpg 760w, /Kuenstlerbar/assets/img/vermietung-tafel.jpg 1264w"
-                 sizes="100vw"
-                 width="1264" height="1896" alt="Hochtische mit Samtstühlen an der Fensterfront der Künstlerbar">
-            </figure>
-      <div class="wrap seitenkopf-text">
+    <section class="page-hero" style="--hero-bild: url('/Kuenstlerbar/assets/img/vermietung-tafel.jpg')">
+      <div class="wrap">
         <nav class="breadcrumb" aria-label="Brotkrumen">
           <ol>
-            <li><a href="/Kuenstlerbar/">Künstlerbar</a></li><li><span aria-current="page">Vermietung</span></li>
+            <li><a href="/Kuenstlerbar/">Künstlerbar</a></li>
+            <li><span aria-current="page">Vermietung</span></li>
           </ol>
         </nav>
+        <p class="eyebrow">Montags und dienstags</p>
         <h1>Bar mieten in Chemnitz</h1>
-        <div class="lead-block">
-          <p class="lead">Montags und dienstags gehört die Künstlerbar euch allein: eigener Tresen, eigenes Barteam, keine fremden Gäste. 299 € Raummiete inklusive Mehrwertsteuer, Getränke nach Verbrauch.</p>
-          <div class="hero-actions">
-            <a class="btn btn-gold js-mail js-anfrage" href="#" data-anlass="Bar mieten"
+        <p class="lead">An unseren Ruhetagen gehört die Künstlerbar euch allein:
+          eigener Tresen, eigenes Barteam, keine fremden Gäste. 299 € Raummiete
+          inklusive Mehrwertsteuer, Getränke nach Verbrauch.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold js-mail js-anfrage" href="#" data-anlass="Bar mieten"
              data-user="info.kuenstlerbar" data-domain="web.de"
-             data-betreff="Anfrage%20Bar%20mieten">Anfrage stellen</a>
-            <a class="btn btn-ghost" href="tel:+4915562688753">Lieber anrufen</a>
-          </div>
+             data-betreff="Anfrage%20Bar%20mieten"
+             data-body="Wunschdatum%3A%0AAnzahl%20Personen%3A%0AAnlass%3A%0AUhrzeit%3A%0A%0AName%3A%0ATelefon%20f%C3%BCr%20R%C3%BCckfragen%3A%0A">Anfrage stellen</a>
+          <a class="btn btn-ghost" href="tel:+4915562688753">Lieber anrufen</a>
         </div>
       </div>
-    </header>
+    </section>
 
-    <section class="sektion">
+    <section class="section">
       <div class="wrap">
-        <p class="marke"><b>01</b>Auf einen Blick</p>
         <dl class="fakten reveal">
           <div class="fakt">
             <dt>Wann</dt>
-            <dd><b>Montag und Dienstag</b>Unsere Ruhetage. Los geht es meist zwischen 17 und 19 Uhr.</dd>
+            <dd><b>Montag und Dienstag</b>Unsere Ruhetage. Start meist zwischen 17 und 19 Uhr.</dd>
           </div>
           <div class="fakt">
             <dt>Wie viele</dt>
-            <dd><b>10 bis 60 Personen</b>Ab etwa 45 Gästen wird es ein Stehempfang, darunter hat jeder einen Platz.</dd>
+            <dd><b>10 bis 60 Personen</b>Ab etwa 45 Gästen wird es ein Stehempfang, darunter sitzt jeder.</dd>
           </div>
           <div class="fakt">
             <dt>Was es kostet</dt>
@@ -346,140 +321,194 @@
       </div>
     </section>
 
-    <section class="sektion sektion--tief" id="formate">
+    <div class="ornament reveal" aria-hidden="true"></div>
+
+    <section class="section" id="formate">
       <div class="wrap">
-        <p class="marke"><b>02</b>Formate</p>
-        <div class="sek-kopf reveal">
-          <h2>Wie der Abend laufen soll</h2>
-          <p class="sek-text">Alles lässt sich kombinieren, zum Beispiel Tasting zum Auftakt und danach freie Bar. Auf den einzelnen Seiten steht jeweils der ganze Ablauf.</p>
+        <div class="section-head reveal">
+          <p class="eyebrow">Formate</p>
+          <h2>Sucht euch aus, <span class="script-accent">wie der Abend läuft</span></h2>
+          <p class="section-sub">Alles lässt sich kombinieren: Tasting zum Auftakt,
+            danach freie Bar. Klickt euch rein, dort steht jeweils der ganze Ablauf.</p>
         </div>
-        <ul class="liste">
-          <li><a class="liste-zeile" href="/Kuenstlerbar/vermietung/firmenevents/">
-            <span class="liste-name">Firmenfeier</span>
-            <span class="liste-text">Weihnachtsfeier, Teamabend, Kundenempfang.</span>
-            <span class="liste-preis">299 € plus Verbrauch</span>
-            <span class="liste-pfeil" aria-hidden="true"></span>
-          </a></li>
-          <li><a class="liste-zeile" href="/Kuenstlerbar/cocktailkurse/">
-            <span class="liste-name">Cocktailkurs</span>
-            <span class="liste-text">Ihr steht selbst hinter dem Tresen.</span>
-            <span class="liste-preis">59 € pro Person</span>
-            <span class="liste-pfeil" aria-hidden="true"></span>
-          </a></li>
-          <li><a class="liste-zeile" href="/Kuenstlerbar/vermietung/tastings/">
-            <span class="liste-name">Tasting</span>
-            <span class="liste-text">Fünf Drinks, erklärt und probiert.</span>
-            <span class="liste-preis">49 € pro Person</span>
-            <span class="liste-pfeil" aria-hidden="true"></span>
-          </a></li>
-          <li><a class="liste-zeile" href="/Kuenstlerbar/vermietung/zigarrenabende/">
-            <span class="liste-name">Zigarrenabend</span>
-            <span class="liste-text">Zigarre und passende Drinks, ab 18.</span>
-            <span class="liste-preis">59 € pro Person</span>
-            <span class="liste-pfeil" aria-hidden="true"></span>
-          </a></li>
-        </ul>
-        <p class="preis-hinweis">Alle Preise inklusive der gesetzlichen Mehrwertsteuer. Die Raummiete von 299 € gilt pauschal für den Abend, unabhängig von der Personenzahl. Die Programmpreise gelten pro Person und enthalten die genannten Drinks sowie belegte Brötchen und eine Snackplatte. Weitere Getränke rechnen wir nach Verbrauch zu den Preisen der <a class="inline-link" href="/Kuenstlerbar/getraenkekarte/">Getränkekarte</a> ab.</p>
+        <div class="quer-links reveal">
+          <a class="quer-link" href="/Kuenstlerbar/vermietung/firmenevents/">
+            <strong>Firmenfeier</strong>
+            <span>Weihnachtsfeier, Teamabend, Kundenempfang. 299 € Barmiete plus Verbrauch.</span>
+          </a>
+          <a class="quer-link" href="/Kuenstlerbar/cocktailkurse/">
+            <strong>Cocktailkurs</strong>
+            <span>Ihr steht selbst hinter dem Tresen. 59 € pro Person.</span>
+          </a>
+          <a class="quer-link" href="/Kuenstlerbar/vermietung/tastings/">
+            <strong>Tasting</strong>
+            <span>Fünf Drinks, erklärt und probiert. 49 € pro Person.</span>
+          </a>
+          <a class="quer-link" href="/Kuenstlerbar/vermietung/zigarrenabende/">
+            <strong>Zigarrenabend</strong>
+            <span>Zigarre und passender Drink, ab 18 Jahren. 59 € pro Person.</span>
+          </a>
+        </div>
+        <p class="preis-hinweis reveal">Alle genannten Preise verstehen sich
+          inklusive der gesetzlichen Mehrwertsteuer. Die Raummiete von 299 € gilt
+          pauschal für den Abend, unabhängig von der Personenzahl. Die
+          Programmpreise gelten pro Person und enthalten die jeweils genannten
+          Drinks sowie belegte Brötchen und eine Snackplatte. Getränke darüber
+          hinaus rechnen wir nach Verbrauch zu den Preisen der
+          <a class="inline-link" href="/Kuenstlerbar/getraenkekarte/">Getränkekarte</a> ab.</p>
       </div>
     </section>
 
-    <section class="sektion">
-      <div class="wrap">
-        <p class="marke"><b>03</b>Der Raum</p>
-        <div class="split">
-          <div class="split-text reveal">
-            <h2>Klein genug, dass ihr unter euch seid</h2>
-            <p>Dunkles Holz, warmes Licht, der geschwungene Tresen und das beleuchtete Flaschenregal dahinter. Eine Gruppe füllt den Raum, ohne sich darin zu verlieren. Und er ist so klein, dass am Ende des Abends alle miteinander geredet haben.</p>
-            <p>Wir stellen um, wie ihr es braucht: lange Tafel, offene Fläche zum Stehen, oder alles bleibt, wie es ist. Musik läuft über unsere Anlage, eure Playlist spielen wir gern.</p>
-            <blockquote class="statement">
-              <p>„Sagt uns, was für ein Abend es werden soll. Den Rest bauen wir drum herum.“</p>
-              <cite>Julian Hahnen, Inhaber</cite>
-            </blockquote>
-          </div>
-          <div class="split-media randlos">
-            <figure class="bild media-main" data-fx="zoom">
-              <img src="/Kuenstlerbar/assets/img/bar-tische.jpg"
-                 srcset="/Kuenstlerbar/assets/img/bar-tische-760.jpg 760w, /Kuenstlerbar/assets/img/bar-tische.jpg 1264w"
-                 sizes="(max-width: 900px) 100vw, 50vw"
-                 width="1264" height="1896" alt="Tische und Barhocker im warmen Licht der Künstlerbar" loading="lazy">
-            </figure>
-            <p class="bild-notiz">Bis zu 60 Personen, 600 Meter vom Nischel.</p>
-          </div>
+    <div class="ornament reveal" aria-hidden="true"></div>
+
+    <section class="section">
+      <div class="wrap split">
+        <div class="split-text reveal">
+          <p class="eyebrow">Der Raum</p>
+          <h2>Klein genug, dass ihr <span class="script-accent">unter euch seid</span></h2>
+          <p>Dunkles Holz, warmes Licht, der geschwungene Tresen und das beleuchtete
+            Flaschenregal dahinter. Die Künstlerbar ist so groß, dass eine Gruppe sie
+            ausfüllt, ohne sich zu verlieren. Und so klein, dass am Ende des Abends
+            alle miteinander geredet haben.</p>
+          <p>Wir stellen um, wie ihr es braucht: lange Tafel, offene Fläche zum Stehen,
+            oder alles bleibt, wie es ist. Musik läuft über unsere Anlage, eure
+            Playlist übernehmen wir gern.</p>
+          <blockquote class="statement">
+            <p>„Sagt uns, was für ein Abend es werden soll. Den Rest bauen wir drum herum.“</p>
+            <cite>Julian Hahnen, Inhaber der Künstlerbar</cite>
+          </blockquote>
+        </div>
+        <div class="split-media reveal">
+          <figure class="media-main">
+            <img src="/Kuenstlerbar/assets/img/vermietung-tafel.jpg"
+                 srcset="/Kuenstlerbar/assets/img/vermietung-tafel-760.jpg 760w, /Kuenstlerbar/assets/img/vermietung-tafel.jpg 1264w"
+                 sizes="(max-width: 900px) 100vw, 480px"
+                 width="1264" height="1896"
+                 alt="Hochtische mit Samtstühlen an der Fensterfront der Künstlerbar" loading="lazy">
+          </figure>
         </div>
       </div>
     </section>
 
-    <section class="sektion sektion--tief" id="fragen">
+    <div class="ornament reveal" aria-hidden="true"></div>
+
+    <section class="section" id="fragen">
       <div class="wrap">
-        <p class="marke"><b>04</b>Fragen und Antworten</p>
-        <div class="sek-kopf reveal">
-          <h2>Was ihr wissen wollt</h2>
-          <p class="sek-text">Wenn hier etwas fehlt, fragt einfach.</p>
+        <div class="section-head reveal">
+          <p class="eyebrow">Fragen und Antworten</p>
+          <h2>Was ihr <span class="script-accent">wissen wollt</span></h2>
+          <p class="section-sub">Wenn hier etwas fehlt: fragt einfach. Wir antworten
+            lieber einmal zu viel als zu wenig.</p>
         </div>
-        <div class="faq">
+        <div class="faq reveal">
           <details>
             <summary>Wann können wir die Bar mieten?</summary>
-            <p>Montags und dienstags. An diesen Tagen ist die Bar für den freien Verkauf geschlossen und gehört komplett eurer Gruppe. An allen anderen Tagen läuft der normale Barbetrieb. Für größere Runden reservieren wir dann gern Plätze, exklusiv wird es aber nicht.</p>
+            <p>Montags und dienstags. Das sind unsere regulären Ruhetage, an denen
+              die Bar für den freien Verkauf geschlossen ist und komplett eurer
+              Gruppe gehört. An allen anderen Tagen läuft der normale Barbetrieb;
+              für größere Runden reservieren wir dann gern Plätze, exklusiv wird es
+              aber nicht.</p>
           </details>
           <details>
             <summary>Wie viele Personen passen rein?</summary>
-            <p>Bis etwa 60, verteilt auf Tische, Sitzecke und Tresen. Ab ungefähr 45 Gästen wird es ein Stehempfang mit Sitzgelegenheiten, darunter bekommt jeder einen Platz. Für Tastings und Cocktailkurse nehmen wir kleinere Gruppen, damit alle am Tresen stehen können.</p>
+            <p>Bis etwa 60, verteilt auf Tische, Sitzecke und Tresen. Ab ungefähr
+              45 Gästen wird es ein Stehempfang mit Sitzgelegenheiten, darunter
+              bekommt jeder einen Platz. Für Tastings und Cocktailkurse nehmen wir
+              kleinere Gruppen, damit alle am Tresen stehen können.</p>
           </details>
           <details>
             <summary>Was kostet das Ganze?</summary>
-            <p>Die Raummiete beträgt 299 € für den Abend, inklusive Mehrwertsteuer und egal, ob ihr zu zwölft oder zu sechzig kommt. Getränke rechnen wir nach Verbrauch ab, zu den normalen Preisen der Karte. Ein Programm kostet pro Person zusätzlich: Tasting 49 €, Cocktailkurs 59 €, Zigarrenabend 59 €. Alle Preise inklusive Mehrwertsteuer, Snackplatte jeweils dabei.</p>
-            <p>Einen Mindestumsatz verlangen wir nicht. Den kann vorher niemand seriös schätzen, und ihr sollt den Abend nicht mit dem Taschenrechner verbringen.</p>
+            <p>Die Raummiete beträgt 299 € für den Abend, inklusive gesetzlicher
+              Mehrwertsteuer und unabhängig davon, ob ihr zu zwölft oder zu sechzig
+              kommt. Getränke rechnen wir danach nach Verbrauch ab, zu den normalen
+              Preisen der Karte. Wollt ihr ein Programm dazu, kostet das pro Person:
+              Tasting 49 €, Cocktailkurs 59 €, Zigarrenabend 59 €. Alle Preise
+              inklusive Mehrwertsteuer, Snackplatte jeweils inklusive.</p>
+            <p>Einen Mindestumsatz verlangen wir bewusst nicht, denn den kann vorher
+              niemand seriös schätzen, und am Ende sitzt ihr mit dem Taschenrechner
+              da, statt euren Abend zu haben.</p>
           </details>
           <details>
             <summary>Können wir Essen dazu haben?</summary>
-            <p>Zu jedem gebuchten Programm gehören belegte Brötchen und eine Snackplatte, ohne Aufpreis.</p>
-            <p>Eine eigene Küche haben wir nicht. Wenn es mehr sein soll, könnt ihr Catering bestellen oder Fingerfood mitbringen. Sagt es bei der Anfrage dazu, dann stellen wir Tische und Teller bereit.</p>
+            <p>Zu jedem gebuchten Programm gehören belegte Brötchen und eine
+              Snackplatte, ohne Aufpreis und ohne Extrazeile auf der Rechnung.
+              Damit steht schon etwas auf dem Tisch, bevor jemand fragt.</p>
+            <p>Eine eigene Küche haben wir nicht. Wenn es mehr sein soll, dürft ihr
+              zusätzlich Catering bestellen oder Fingerfood mitbringen. Sagt es bei
+              der Anfrage dazu, dann stellen wir Tische und Teller bereit und planen
+              den Ablauf so, dass das Essen nicht kalt wird, während noch angestoßen
+              wird.</p>
           </details>
           <details>
             <summary>Wie früh müssen wir anfragen?</summary>
-            <p>Mindestens zwei Wochen vor eurem Wunschtermin. Einkauf, Personalplanung und Vorbereitung brauchen diese Zeit. Im Anfrageformular lassen sich deshalb erst Termine ab zwei Wochen in der Zukunft auswählen.</p>
-            <p>Zwischen Anfang November und Silvester sind die Montage und Dienstage schnell weg. Für Weihnachtsfeiern fragt am besten schon im September oder Oktober.</p>
+            <p>Mindestens zwei Wochen vor eurem Wunschtermin. Kürzere Vorlaufzeiten
+              können wir nicht zusagen: Einkauf, Personalplanung und Vorbereitung
+              brauchen diese Zeit. Im Anfrageformular lassen sich Termine deshalb
+              erst ab zwei Wochen in der Zukunft auswählen.</p>
+            <p>Zwischen Anfang November und Silvester sind die Montage und Dienstage
+              früh weg. Für Weihnachtsfeiern fragt am besten schon im September oder
+              Oktober.</p>
           </details>
           <details>
             <summary>Geht ein Cocktailkurs auch für zwei Personen?</summary>
-            <p>Ja. Der reguläre <a class="inline-link" href="/Kuenstlerbar/cocktailkurse/">Cocktailkurs</a> zu 59 € pro Person läuft ab 6 Personen, wir machen ihn aber auch schon ab 2. Dafür gibt es keinen Listenpreis, sondern ein individuelles Angebot, weil sich Barkeeper, Zutaten und Aufbau auf weniger Leute verteilen. Schreibt uns, mit wie vielen ihr kommt, dann nennen wir euch den Preis vorab und verbindlich.</p>
+            <p>Ja. Der reguläre
+              <a class="inline-link" href="/Kuenstlerbar/cocktailkurse/">Cocktailkurs</a> zu 59 €
+              pro Person läuft ab 6 Personen, wir machen ihn aber auch schon ab 2.
+              Weil sich Barkeeper, Zutaten und Aufbau dann auf weniger Köpfe
+              verteilen, gilt dafür kein Listenpreis, sondern ein individuelles
+              Angebot. Schreibt uns, mit wie vielen ihr kommen wollt, dann nennen
+              wir euch den Preis vorab und verbindlich.</p>
           </details>
           <details>
             <summary>Wie lange geht so ein Abend?</summary>
-            <p>Meist geht es zwischen 17 und 19 Uhr los und gegen Mitternacht zu Ende. Soll es länger werden, sagt es bei der Anfrage, das lässt sich meistens einrichten.</p>
+            <p>Üblich ist Start zwischen 17 und 19 Uhr, Ende gegen Mitternacht. Soll
+              es länger werden, sagt es bei der Anfrage; das lässt sich meistens
+              einrichten.</p>
           </details>
           <details>
             <summary>Braucht ihr eine Anzahlung?</summary>
-            <p>Ja, bei jeder Buchung. Die Raummiete von 299 € wird bei der Zusage als Anzahlung fällig. Erst damit ist der Termin fest für euch reserviert.</p>
-            <p>Zusätzlich kostet das nichts: Die Anzahlung wird am Ende des Abends mit eurer Rechnung verrechnet. Die Zahlungsdaten kommen mit der Terminbestätigung.</p>
+            <p>Ja, bei jeder Buchung. Die Raummiete von 299 € wird bei der Zusage
+              als Anzahlung fällig und macht den Termin für euch verbindlich. Erst
+              damit ist der Abend fest reserviert und wir sagen ihn keinem anderen
+              zu.</p>
+            <p>Ein zusätzlicher Betrag ist das nicht: Die Anzahlung wird am Ende des
+              Abends vollständig mit eurer Rechnung verrechnet. Die Zahlungsdaten
+              schicken wir euch mit der Terminbestätigung.</p>
           </details>
           <details>
             <summary>Können wir unsere eigene Musik spielen?</summary>
-            <p>Ja, eure Playlist läuft über unsere Anlage. Für eigene DJ-Technik ist der Raum nur bedingt gemacht. Wenn ihr etwas Größeres plant, sprecht uns vorher an.</p>
+            <p>Ja. Eure Playlist läuft über unsere Anlage. Für eigene DJ-Technik ist
+              der Raum nur bedingt gemacht. Wenn ihr etwas Größeres plant, sprecht
+              uns vorher an.</p>
           </details>
           <details>
             <summary>Ist die Bar barrierefrei?</summary>
-            <p>Der Zugang ist nicht stufenlos. Sagt uns Bescheid, wenn jemand aus eurer Runde schlecht zu Fuß ist. Wir sagen ehrlich, was geht, und finden meistens eine Lösung.</p>
+            <p>Der Zugang ist nicht stufenlos. Sagt uns Bescheid, wenn jemand aus
+              eurer Runde schlecht zu Fuß ist. Wir sagen ehrlich, was geht, und
+              finden meistens eine Lösung.</p>
           </details>
           <details>
             <summary>Darf bei euch geraucht werden?</summary>
-            <p>Geraucht wird auf der Terrasse, drinnen bleibt es rauchfrei. Die einzige Ausnahme sind unsere <a class="inline-link" href="/Kuenstlerbar/vermietung/zigarrenabende/">Zigarrenabende</a> in geschlossener Runde.</p>
+            <p>Geraucht wird bei uns auf der Terrasse, dort ist immer jemand zum
+              Reden. Drinnen bleibt es rauchfrei. Die einzige Ausnahme sind unsere
+              <a class="inline-link" href="/Kuenstlerbar/vermietung/zigarrenabende/">Zigarrenabende</a>
+              in geschlossener Runde.</p>
           </details>
         </div>
       </div>
     </section>
 
-    <section class="sektion">
+    <section class="section">
       <div class="wrap cta-band">
-        <h2>Erzählt uns von eurem Abend</h2>
-        <div class="cta-rechts">
-          <p>Datum, Personenzahl, Anlass. Mehr brauchen wir nicht, um euch zu sagen, ob es passt.</p>
-          <div class="hero-actions">
-            <a class="btn btn-gold js-mail js-anfrage" href="#" data-anlass="Bar mieten"
+        <h2>Erzählt uns von <span class="script-accent">eurem Abend</span></h2>
+        <p>Datum, Personenzahl, Anlass. Mehr brauchen wir nicht, um euch zu sagen,
+          ob es passt.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold js-mail js-anfrage" href="#" data-anlass="Bar mieten"
              data-user="info.kuenstlerbar" data-domain="web.de"
-             data-betreff="Anfrage%20Bar%20mieten">Anfrage stellen</a>
-<a class="btn btn-ghost" href="tel:+4915562688753">015562 688753</a>
-          </div>
+             data-betreff="Anfrage%20Bar%20mieten"
+             data-body="Wunschdatum%3A%0AAnzahl%20Personen%3A%0AAnlass%3A%0AUhrzeit%3A%0A%0AName%3A%0ATelefon%20f%C3%BCr%20R%C3%BCckfragen%3A%0A">Anfrage stellen</a>
+          <a class="btn btn-ghost" href="tel:+4915562688753">015562 688753</a>
         </div>
       </div>
     </section>
@@ -488,25 +517,39 @@
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <div class="footer-logo" aria-hidden="true"></div>
-      <address class="footer-adresse">
-        <strong>Künstlerbar</strong>
-        Hartmannstraße 7D<br>
-        09111 Chemnitz<br>
-        <a class="inline-link" href="tel:+4915562688753">015562 688753</a>
-      </address>
+      <div class="theme-switch">
+        <button class="theme-toggle" type="button" aria-label="Dunkles Design einschalten" aria-pressed="false">
+          <span class="tt-track" aria-hidden="true">
+            <span class="tt-sky"></span>
+            <span class="tt-stars"></span>
+          </span>
+          <span class="tt-thumb" aria-hidden="true">
+            <span class="tt-orb"></span>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4.4"/>
+              <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+      <p class="footer-name">Künstlerbar · Hartmannstraße 7D · 09111 Chemnitz</p>
       <nav class="footer-nav" aria-label="Weitere Seiten">
         <a href="/Kuenstlerbar/">Startseite</a>
         <a href="/Kuenstlerbar/getraenkekarte/">Getränkekarte</a>
-        <a href="/Kuenstlerbar/vermietung/">Vermietung</a>
         <a href="/Kuenstlerbar/cocktailkurse/">Cocktailkurse</a>
+        <a class="insta-link" href="https://www.instagram.com/kuenstlerbarchemnitz/" target="_blank" rel="noopener"><svg class="icon-insta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.2"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg>Instagram</a>
         <a href="/Kuenstlerbar/impressum/">Impressum</a>
         <a href="/Kuenstlerbar/datenschutz/">Datenschutz</a>
-        <a href="https://www.instagram.com/kuenstlerbarchemnitz/" target="_blank" rel="noopener">Instagram</a>
       </nav>
-      <div class="footer-fuss">
-        <p>© <span id="jahr">2026</span> Künstlerbar</p>
-        <p class="footer-love">Gestaltung <img class="footer-love-logo" src="/Kuenstlerbar/assets/img/macher-logo.png" alt="AL" width="40" height="18"></p>
-      </div>
+      <p class="footer-note">© <span id="jahr">2026</span> Künstlerbar. Alle Rechte vorbehalten.</p>
+      <p class="footer-love">Made with
+        <svg class="icon-heart" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.4-4.6-10-9.3C.5 8.9 2.2 5 5.9 5c2.2 0 3.6 1.2 4.4 2.5.4.7 1 .7 1.4 0C12.5 6.2 13.9 5 16.1 5c3.7 0 5.4 3.9 3.9 6.7C17.4 16.4 12 21 12 21Z"/></svg>
+        <span class="sr-only">Liebe</span> by
+        <img class="footer-love-logo" src="/Kuenstlerbar/assets/img/macher-logo.png" alt="AL" height="20">
+      </p>
     </div>
   </footer>
 
@@ -517,7 +560,7 @@
         <p>Vier Angaben reichen. Wir melden uns meist noch am selben Abend.</p>
       </div>
       <button class="anfrage-zu" type="button" aria-label="Fenster schließen">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
     </div>
 
@@ -575,6 +618,6 @@
     </form>
   </dialog>
 
-  <script src="/Kuenstlerbar/js/main.js"></script>
+  <script src="/Kuenstlerbar/js/main.js?v=5.12"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-variante="bild" data-seite="karte" data-start="/Kuenstlerbar/test/3/">
 <head>
   <meta charset="UTF-8">
   <meta name="robots" content="noindex">
@@ -1345,6 +1345,19 @@
       #ohne-js { display: block !important; }
     </style>
   </noscript>
+  <link rel="stylesheet" href="/Kuenstlerbar/css/uebergang.css?v=1">
+  <style>@view-transition { navigation: auto; }</style>
+  <script>
+    (function () {
+      try {
+        var r = document.referrer.split("#")[0].split("?")[0].replace(/index\.html$/, "");
+        var start = location.protocol + "//" + location.host + "/Kuenstlerbar/test/3/";
+        if (r === start && !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+          document.documentElement.classList.add("ue-ankunft-bild");
+        }
+      } catch (e) { }
+    })();
+  </script>
 </head>
 <body>
   <span id="top" aria-hidden="true"></span>
@@ -1352,7 +1365,7 @@
 
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="/Kuenstlerbar/" aria-label="Künstlerbar, zur Startseite">
+      <a class="brand" href="/Kuenstlerbar/test/3/" aria-label="Künstlerbar, zur Startseite">
         <span class="brand-logo" aria-hidden="true"></span>
         <span class="brand-word">Künstlerbar</span>
       </a>
@@ -1384,7 +1397,7 @@
       <div class="wrap">
         <nav class="breadcrumb" aria-label="Brotkrumen">
           <ol>
-            <li><a href="/Kuenstlerbar/">Künstlerbar</a></li>
+            <li><a href="/Kuenstlerbar/test/3/">Künstlerbar</a></li>
             <li><span aria-current="page">Getränkekarte</span></li>
           </ol>
         </nav>
@@ -1475,7 +1488,7 @@
       </div>
       <p class="footer-name">Künstlerbar · Hartmannstraße 7D · 09111 Chemnitz</p>
       <nav class="footer-nav" aria-label="Weitere Seiten">
-        <a href="/Kuenstlerbar/">Startseite</a>
+        <a href="/Kuenstlerbar/test/3/">Startseite</a>
         <a href="/Kuenstlerbar/vermietung/">Vermietung</a>
         <a href="/Kuenstlerbar/cocktailkurse/">Cocktailkurse</a>
         <a class="insta-link" href="https://www.instagram.com/kuenstlerbarchemnitz/" target="_blank" rel="noopener"><svg class="icon-insta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.2"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg>Instagram</a>
@@ -1558,5 +1571,6 @@
 
   <script src="/Kuenstlerbar/js/menu-data.js?v=5.12"></script>
   <script src="/Kuenstlerbar/js/main.js?v=5.12"></script>
+  <script src="/Kuenstlerbar/js/uebergang.js?v=1"></script>
 </body>
 </html>

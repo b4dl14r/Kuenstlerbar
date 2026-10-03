@@ -7,42 +7,37 @@
   <title>Zigarrenabend in Chemnitz – Künstlerbar</title>
   <meta name="description" content="Zigarre und passender Drink, in geschlossener Runde, 59 € pro Person inkl. MwSt. Zigarrenabende in der Künstlerbar Chemnitz, montags und dienstags.">
   <link rel="canonical" href="https://kuenstlerbar.de/vermietung/zigarrenabende/">
-  <link rel="alternate" hreflang="de" href="https://kuenstlerbar.de/vermietung/zigarrenabende/">
-  <link rel="alternate" hreflang="en" href="https://kuenstlerbar.de/en/private-hire/cigar-evenings/">
-  <link rel="alternate" hreflang="x-default" href="https://kuenstlerbar.de/vermietung/zigarrenabende/">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
-  <meta property="og:locale:alternate" content="en_GB">
   <meta property="og:site_name" content="Künstlerbar Chemnitz">
   <meta property="og:url" content="https://kuenstlerbar.de/vermietung/zigarrenabende/">
   <meta property="og:title" content="Zigarrenabend in Chemnitz – Künstlerbar">
   <meta property="og:description" content="Zigarre und passender Drink, in geschlossener Runde. Nur für Gäste ab 18 Jahren.">
-  <meta property="og:image" content="https://kuenstlerbar.de/assets/img/og-kuenstlerbar.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image" content="https://kuenstlerbar.de/assets/img/zigarrenabend-tumbler.jpg">
+  <meta property="og:image:width" content="1264">
+  <meta property="og:image:height" content="848">
+  <meta property="og:image:alt" content="Zigarre auf einem Kristallaschenbecher neben einem Tumbler dunklen Rums">
   <meta name="twitter:card" content="summary_large_image">
 
-  <meta name="theme-color" content="#000000">
-  <link rel="icon" type="image/svg+xml" href="/Kuenstlerbar/assets/img/kuenstlerbar-logo.svg">
+  <meta name="theme-color" id="meta-theme" content="#340810">
   <link rel="icon" type="image/png" href="/Kuenstlerbar/assets/img/kuenstlerbar-logo.png">
 
   <script>
     (function () {
-      var r = document.documentElement;
       try {
-        if (!sessionStorage.getItem("kb-intro") &&
-            !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
-          r.classList.add("mit-intro");
-          setTimeout(function () { r.classList.remove("mit-intro"); }, 13000);
-        }
-      } catch (e) { }
+        var t = localStorage.getItem("kb-theme");
+        if (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) t = "dark";
+        if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
+      } catch (e) {  }
     })();
   </script>
 
-  <link rel="preload" as="font" type="font/woff2" href="/Kuenstlerbar/assets/fonts/BodoniModa-var.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="/Kuenstlerbar/assets/fonts/HankenGrotesk-var.woff2" crossorigin>
-  <link rel="stylesheet" href="/Kuenstlerbar/css/style.css">
+  <link rel="preload" as="font" type="font/woff2" href="/Kuenstlerbar/assets/fonts/Jost-300.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/Kuenstlerbar/assets/fonts/CormorantGaramond-500.woff2" crossorigin>
+  <link rel="stylesheet" href="/Kuenstlerbar/css/fonts.css?v=5.12">
+  <link rel="stylesheet" href="/Kuenstlerbar/css/style.css?v=5.12">
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -141,26 +136,16 @@
 
   <noscript>
     <style>
-      .reveal { opacity: 1 !important; transform: none !important; }
-      [data-fx="vorhang"] img { clip-path: none !important; }
-      [data-fx] img { transform: none !important; }
+      .reveal, .reveal-item { opacity: 1 !important; animation: none !important; }
+      .main-nav a.active::after {
+        content: ""; position: absolute; left: 1px; right: 1px; bottom: 4px;
+        height: 1px; background: #e3bd7a;
+      }
     </style>
   </noscript>
 </head>
 <body>
-  <div class="intro" aria-hidden="true">
-    <svg class="intro-logo" viewBox="0 0 768 768" focusable="false">
-      <use class="intro-basis" href="/Kuenstlerbar/assets/img/logo-teile.svg#basis"/>
-      <g class="intro-rute">
-        <use href="/Kuenstlerbar/assets/img/logo-teile.svg#rute"/>
-        <g class="intro-fang">
-          <use href="/Kuenstlerbar/assets/img/logo-teile.svg#schnur"/>
-          <use href="/Kuenstlerbar/assets/img/logo-teile.svg#olive"/>
-        </g>
-      </g>
-    </svg>
-  </div>
-
+  <span id="top" aria-hidden="true"></span>
   <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
 
   <header class="site-header">
@@ -170,101 +155,104 @@
         <span class="brand-word">Künstlerbar</span>
       </a>
       <nav class="main-nav" id="hauptnav" aria-label="Hauptnavigation">
+        <span class="nav-indicator" aria-hidden="true"></span>
         <a href="/Kuenstlerbar/#bar">Die Bar</a>
         <a href="/Kuenstlerbar/getraenkekarte/" data-spy="karte">Karte</a>
         <div class="nav-gruppe">
           <button class="nav-gruppe-knopf" type="button" aria-expanded="false" aria-controls="nav-gruppen" data-spy="gruppen">Vermietung</button>
           <div class="nav-untermenue" id="nav-gruppen">
-            <div>
-              <a href="/Kuenstlerbar/vermietung/">Bar mieten</a>
-              <a href="/Kuenstlerbar/vermietung/firmenevents/">Firmenfeier</a>
-              <a href="/Kuenstlerbar/cocktailkurse/">Cocktailkurs</a>
-              <a href="/Kuenstlerbar/vermietung/tastings/">Tasting</a>
-              <a href="/Kuenstlerbar/vermietung/zigarrenabende/">Zigarrenabend</a>
-            </div>
+            <a href="/Kuenstlerbar/vermietung/">Bar mieten</a>
+            <a href="/Kuenstlerbar/vermietung/firmenevents/">Firmenfeier</a>
+            <a href="/Kuenstlerbar/cocktailkurse/">Cocktailkurs</a>
+            <a href="/Kuenstlerbar/vermietung/tastings/">Tasting</a>
+            <a href="/Kuenstlerbar/vermietung/zigarrenabende/">Zigarrenabend</a>
           </div>
         </div>
         <a href="/Kuenstlerbar/#galerie">Galerie</a>
         <a href="/Kuenstlerbar/#kontakt">Kontakt</a>
-        <div class="sprache" role="group" aria-label="Sprache">
-          <a href="/Kuenstlerbar/vermietung/zigarrenabende/" lang="de" hreflang="de" aria-current="true">DE</a>
-          <span class="sprache-trenner" aria-hidden="true">/</span>
-          <a href="/Kuenstlerbar/en/private-hire/cigar-evenings/" lang="en" hreflang="en">EN</a>
-        </div>
       </nav>
-      <button class="nav-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="hauptnav">
+      <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="hauptnav">
         <svg class="menu-toggle-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="mt-kurve" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"/><path d="M7 16 27 16"/></svg>
       </button>
     </div>
   </header>
 
   <main id="inhalt">
-    <header class="seitenkopf">
-      <figure class="bild seitenkopf-bild" data-fx="zoom">
-              <img src="/Kuenstlerbar/assets/img/zigarrenabend-tumbler.jpg"
-                 srcset="/Kuenstlerbar/assets/img/zigarrenabend-tumbler-760.jpg 760w, /Kuenstlerbar/assets/img/zigarrenabend-tumbler.jpg 1264w"
-                 sizes="100vw"
-                 width="1264" height="848" alt="Zigarre auf einem Kristallaschenbecher neben einem Tumbler dunklen Rums mit großem Eiswürfel">
-            </figure>
-      <div class="wrap seitenkopf-text">
+    <section class="page-hero" style="--hero-bild: url('/Kuenstlerbar/assets/img/zigarrenabend-tumbler.jpg')">
+      <div class="wrap">
         <nav class="breadcrumb" aria-label="Brotkrumen">
           <ol>
-            <li><a href="/Kuenstlerbar/">Künstlerbar</a></li><li><a href="/Kuenstlerbar/vermietung/">Vermietung</a></li><li><span aria-current="page">Zigarrenabende</span></li>
+            <li><a href="/Kuenstlerbar/">Künstlerbar</a></li>
+            <li><a href="/Kuenstlerbar/vermietung/">Vermietung</a></li>
+            <li><span aria-current="page">Zigarrenabende</span></li>
           </ol>
         </nav>
+        <p class="eyebrow">In geschlossener Runde</p>
         <h1>Zigarrenabend in Chemnitz</h1>
-        <div class="lead-block">
-          <p class="lead">Eine gute Zigarre braucht Zeit, den passenden Drink und eine Runde, die es nicht eilig hat. Dafür öffnen wir montags und dienstags die Künstlerbar für geschlossene Gesellschaften. Nur für Gäste ab 18 Jahren.</p>
-          <div class="hero-actions">
-            <a class="btn btn-gold js-mail js-anfrage" href="#" data-anlass="Zigarrenabend"
+        <p class="lead">Eine gute Zigarre braucht Zeit, den passenden Drink und eine
+          Runde, die es nicht eilig hat. Genau dafür öffnen wir montags und dienstags
+          die Künstlerbar für geschlossene Gesellschaften: dunkles Holz, warmes
+          Licht, ein kräftiger Rum oder Whisky im Glas. Nur für Gäste ab 18 Jahren.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold js-mail js-anfrage" data-anlass="Zigarrenabend" href="#"
              data-user="info.kuenstlerbar" data-domain="web.de"
-             data-betreff="Anfrage%20Zigarrenabend">Zigarrenabend anfragen</a>
-            <a class="btn btn-ghost" href="tel:+4915562688753">015562 688753 anrufen</a>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <section class="sektion">
-      <div class="wrap">
-        <p class="marke"><b>01</b>Der Abend</p>
-        <div class="split">
-          <div class="split-text reveal">
-            <h2>Zigarre und das richtige Glas</h2>
-            <p>Zu jeder Zigarre gibt es zwei Drinks, die dazu passen: meist einen kräftigen Rum oder Whisky pur und einen gebauten Drink, der die Süße aufnimmt, ohne sie zu überdecken. Wer lieber bei Cocktails bleibt, bekommt eine Auswahl aus unserer Karte.</p>
-            <p>Ein festes Programm gibt es nicht. Unser Barkeeper bleibt bei eurer Runde, erklärt auf Wunsch, was im Glas ist, und hält sich sonst im Hintergrund.</p>
-            <p>An allen anderen Abenden wird auf der Terrasse geraucht, drinnen bleibt es rauchfrei. Der Zigarrenabend in geschlossener Runde ist die Ausnahme. Sprecht uns bei der Anfrage darauf an, dann klären wir gemeinsam, wie wir den Abend aufziehen.</p>
-          </div>
-          <div class="split-media randlos">
-            <figure class="bild media-main" data-fx="zoom">
-              <img src="/Kuenstlerbar/assets/img/bar-sitzecke.jpg"
-                 sizes="(max-width: 900px) 100vw, 50vw"
-                 width="640" height="853" alt="Sitzecke mit Samtbänken und warmem Licht" loading="lazy">
-            </figure>
-            <p class="bild-notiz">Sechs bis zwanzig Personen, ab 18 Jahren.</p>
-          </div>
+             data-betreff="Anfrage%20Zigarrenabend"
+             data-body="Wunschdatum%3A%0AAnzahl%20Personen%3A%0AAnlass%3A%0AUhrzeit%3A%0A%0ATelefon%20f%C3%BCr%20R%C3%BCckfragen%3A%0A">Abend anfragen</a>
+          <a class="btn btn-ghost" href="tel:+4915562688753">015562 688753 anrufen</a>
         </div>
       </div>
     </section>
 
-    <section class="sektion sektion--tief">
+    <section class="section">
+      <div class="wrap split">
+        <div class="split-text reveal">
+          <p class="eyebrow">Der Abend</p>
+          <h2>Zigarre und <span class="script-accent">das richtige Glas</span></h2>
+          <p>Wir stellen zu jeder Zigarre zwei Drinks, die dazu passen: meist einen
+            kräftigen Rum oder Whisky pur und einen gebauten Drink, der die Süße
+            aufnimmt, ohne sie zu überdecken. Wer lieber bei Cocktails bleibt,
+            bekommt eine Auswahl aus unserer Karte.</p>
+          <p>Der Abend läuft ohne festes Programm. Unser Barkeeper bleibt bei eurer
+            Runde, erklärt auf Wunsch, was im Glas ist, und hält sich sonst
+            angenehm im Hintergrund.</p>
+          <p>An allen anderen Abenden wird bei uns auf der Terrasse geraucht, drinnen
+            bleibt es rauchfrei. Der Zigarrenabend in geschlossener Runde ist die
+            Ausnahme. Sprecht uns bei der Anfrage kurz darauf an, dann klären wir
+            gemeinsam, wie wir den Abend aufziehen.</p>
+        </div>
+        <div class="split-media reveal">
+          <figure class="media-main">
+            <img src="/Kuenstlerbar/assets/img/zigarrenabend-tumbler.jpg"
+                 srcset="/Kuenstlerbar/assets/img/zigarrenabend-tumbler-760.jpg 760w, /Kuenstlerbar/assets/img/zigarrenabend-tumbler.jpg 1264w"
+                 sizes="(max-width: 900px) 100vw, 480px"
+                 width="1264" height="848"
+                 alt="Zigarre auf einem Kristallaschenbecher neben einem Tumbler dunklen Rums mit großem Eiswürfel" loading="lazy">
+          </figure>
+          <p class="media-caption">Sechs bis zwanzig Personen, ab 18 Jahren.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="ornament reveal" aria-hidden="true"></div>
+
+    <section class="section">
       <div class="wrap">
-        <p class="marke"><b>02</b>Enthalten</p>
-        <div class="sek-kopf reveal">
-          <h2>Was dazugehört</h2>
+        <div class="section-head reveal">
+          <p class="eyebrow">Enthalten</p>
+          <h2>Was dazu <span class="script-accent">gehört</span></h2>
         </div>
         <dl class="fakten reveal">
           <div class="fakt">
             <dt>Eine Zigarre</dt>
-            <dd>Aus einer kleinen Auswahl, vom milden Einstieg bis zur kräftigen Sorte. Cutter und Feuer stellen wir.</dd>
+            <dd>Aus einer kleinen Auswahl, vom milden Einstieg bis zur kräftigen Variante. Schneider und Feuer stellen wir.</dd>
           </div>
           <div class="fakt">
             <dt>Zwei Drinks</dt>
             <dd>Passend abgestimmt: einer pur, einer gebaut. Alkoholfrei ist auf Wunsch möglich.</dd>
           </div>
           <div class="fakt">
-            <dt>Snacks</dt>
-            <dd>Belegte Brötchen und eine Snackplatte ohne Aufpreis. Zu Rum und Zigarre gehört etwas Handfestes.</dd>
+            <dt>Eine Runde Snacks</dt>
+            <dd>Belegte Brötchen und eine Snackplatte stellen wir dazu, ohne Aufpreis. Zu Rum und Zigarre gehört etwas Handfestes.</dd>
           </div>
           <div class="fakt">
             <dt>Geschlossene Runde</dt>
@@ -272,18 +260,21 @@
           </div>
           <div class="fakt">
             <dt>Ab 18 Jahren</dt>
-            <dd>Zutritt nur für Volljährige. Wir kontrollieren das freundlich, aber zuverlässig.</dd>
+            <dd>Zutritt nur für Volljährige. Wir kontrollieren das freundlich, aber verlässlich.</dd>
           </div>
         </dl>
       </div>
     </section>
 
-    <section class="sektion">
+    <div class="ornament reveal" aria-hidden="true"></div>
+
+    <section class="section">
       <div class="wrap">
-        <p class="marke"><b>03</b>Preis</p>
-        <div class="sek-kopf reveal">
-          <h2>Was der Abend kostet</h2>
-          <p class="sek-text">Pro Person, mit Zigarre, zwei Drinks und Snackplatte. Alles Weitere wird nach Verbrauch abgerechnet.</p>
+        <div class="section-head reveal">
+          <p class="eyebrow">Preis</p>
+          <h2>Was der Abend <span class="script-accent">kostet</span></h2>
+          <p class="section-sub">Pro Person, Zigarre, zwei Drinks und Snackplatte
+            inklusive. Alles Weitere wird nach Verbrauch abgerechnet.</p>
         </div>
         <div class="angebot-grid reveal-group">
           <article class="angebot reveal">
@@ -298,9 +289,11 @@
             </ul>
             <p class="angebot-preis">59&nbsp;€ <small>pro Person, inkl. MwSt.</small></p>
             <p class="angebot-aktion">
-              <a class="btn btn-gold js-mail js-anfrage" href="#" data-anlass="Zigarrenabend" data-paket="Zigarrenabend"
-             data-user="info.kuenstlerbar" data-domain="web.de"
-             data-betreff="Anfrage%20Zigarrenabend">Dieses Paket anfragen</a>
+              <a class="btn btn-gold js-mail js-anfrage" href="#"
+                 data-anlass="Zigarrenabend" data-paket="Zigarrenabend"
+                 data-user="info.kuenstlerbar" data-domain="web.de"
+                 data-betreff="Anfrage%20Zigarrenabend"
+                 data-body="Wunschdatum%3A%0AAnzahl%20Personen%3A%0AUhrzeit%3A%0A%0AName%3A%0ATelefon%20f%C3%BCr%20R%C3%BCckfragen%3A%0A">Dieses Paket anfragen</a>
             </p>
           </article>
           <article class="angebot reveal">
@@ -308,19 +301,25 @@
             <p>Verkostung zum Auftakt, danach Zigarre und Digestif.</p>
             <ul>
               <li>5 Drinks im Tasting</li>
-              <li>Danach Zigarre</li>
+              <li>Anschließend Zigarre</li>
               <li>Snackplatte inklusive</li>
               <li>Etwa 3 Stunden</li>
             </ul>
             <p class="angebot-preis">89&nbsp;€ <small>pro Person, inkl. MwSt.</small></p>
             <p class="angebot-aktion">
-              <a class="btn btn-gold js-mail js-anfrage" href="#" data-anlass="Zigarrenabend" data-paket="Mit Tasting"
-             data-user="info.kuenstlerbar" data-domain="web.de"
-             data-betreff="Anfrage%20Zigarrenabend">Dieses Paket anfragen</a>
+              <a class="btn btn-gold js-mail js-anfrage" href="#"
+                 data-anlass="Zigarrenabend" data-paket="Mit Tasting"
+                 data-user="info.kuenstlerbar" data-domain="web.de"
+                 data-betreff="Anfrage%20Zigarrenabend"
+                 data-body="Wunschdatum%3A%0AAnzahl%20Personen%3A%0AUhrzeit%3A%0A%0AName%3A%0ATelefon%20f%C3%BCr%20R%C3%BCckfragen%3A%0A">Dieses Paket anfragen</a>
             </p>
           </article>
         </div>
-        <p class="preis-hinweis">Alle Preise pro Person und inklusive der gesetzlichen Mehrwertsteuer. Enthalten sind Zigarre, die abgestimmten Drinks und die Snackplatte. Weitere Getränke rechnen wir nach Verbrauch zu den Preisen der <a class="inline-link" href="/Kuenstlerbar/getraenkekarte/">Getränkekarte</a> ab.</p>
+        <p class="preis-hinweis reveal">Alle Preise verstehen sich pro Person und
+          inklusive der gesetzlichen Mehrwertsteuer. Im Preis enthalten sind
+          Zigarre, die abgestimmten Drinks und die Snackplatte. Getränke, die ihr
+          darüber hinaus bestellt, rechnen wir nach Verbrauch zu den Preisen der
+          <a class="inline-link" href="/Kuenstlerbar/getraenkekarte/">Getränkekarte</a> ab.</p>
       </div>
     </section>
   </main>
@@ -328,25 +327,40 @@
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <div class="footer-logo" aria-hidden="true"></div>
-      <address class="footer-adresse">
-        <strong>Künstlerbar</strong>
-        Hartmannstraße 7D<br>
-        09111 Chemnitz<br>
-        <a class="inline-link" href="tel:+4915562688753">015562 688753</a>
-      </address>
+      <div class="theme-switch">
+        <button class="theme-toggle" type="button" aria-label="Dunkles Design einschalten" aria-pressed="false">
+          <span class="tt-track" aria-hidden="true">
+            <span class="tt-sky"></span>
+            <span class="tt-stars"></span>
+          </span>
+          <span class="tt-thumb" aria-hidden="true">
+            <span class="tt-orb"></span>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4.4"/>
+              <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+      <p class="footer-name">Künstlerbar · Hartmannstraße 7D · 09111 Chemnitz</p>
       <nav class="footer-nav" aria-label="Weitere Seiten">
         <a href="/Kuenstlerbar/">Startseite</a>
         <a href="/Kuenstlerbar/getraenkekarte/">Getränkekarte</a>
         <a href="/Kuenstlerbar/vermietung/">Vermietung</a>
         <a href="/Kuenstlerbar/cocktailkurse/">Cocktailkurse</a>
+        <a class="insta-link" href="https://www.instagram.com/kuenstlerbarchemnitz/" target="_blank" rel="noopener"><svg class="icon-insta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.2"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg>Instagram</a>
         <a href="/Kuenstlerbar/impressum/">Impressum</a>
         <a href="/Kuenstlerbar/datenschutz/">Datenschutz</a>
-        <a href="https://www.instagram.com/kuenstlerbarchemnitz/" target="_blank" rel="noopener">Instagram</a>
       </nav>
-      <div class="footer-fuss">
-        <p>© <span id="jahr">2026</span> Künstlerbar</p>
-        <p class="footer-love">Gestaltung <img class="footer-love-logo" src="/Kuenstlerbar/assets/img/macher-logo.png" alt="AL" width="40" height="18"></p>
-      </div>
+      <p class="footer-note">© <span id="jahr">2026</span> Künstlerbar. Alle Rechte vorbehalten.</p>
+      <p class="footer-love">Made with
+        <svg class="icon-heart" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.4-4.6-10-9.3C.5 8.9 2.2 5 5.9 5c2.2 0 3.6 1.2 4.4 2.5.4.7 1 .7 1.4 0C12.5 6.2 13.9 5 16.1 5c3.7 0 5.4 3.9 3.9 6.7C17.4 16.4 12 21 12 21Z"/></svg>
+        <span class="sr-only">Liebe</span> by
+        <img class="footer-love-logo" src="/Kuenstlerbar/assets/img/macher-logo.png" alt="AL" height="20">
+      </p>
     </div>
   </footer>
 
@@ -357,7 +371,7 @@
         <p>Vier Angaben reichen. Wir melden uns meist noch am selben Abend.</p>
       </div>
       <button class="anfrage-zu" type="button" aria-label="Fenster schließen">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
     </div>
 
@@ -415,6 +429,6 @@
     </form>
   </dialog>
 
-  <script src="/Kuenstlerbar/js/main.js"></script>
+  <script src="/Kuenstlerbar/js/main.js?v=5.12"></script>
 </body>
 </html>

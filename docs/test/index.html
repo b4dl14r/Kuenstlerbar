@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Übergänge zur Getränkekarte · Test</title>
+<link rel="stylesheet" href="/Kuenstlerbar/css/fonts.css?v=1">
+<style>
+  body { margin:0; background:#340810; color:#f6ecdb; font-family:"Jost",sans-serif; font-weight:300; line-height:1.6; }
+  .wrap { max-width:720px; margin:0 auto; padding:56px 16px 80px; }
+  h1 { font-family:"Cormorant Garamond",serif; font-weight:500; font-size:clamp(2rem,6vw,3rem); margin:0 0 10px; line-height:1.1; }
+  p { color:rgba(246,236,219,.72); margin:0 0 32px; }
+  .v { display:flex; gap:18px; align-items:flex-start; padding:20px 22px; margin-bottom:12px; border:1px solid rgba(227,189,122,.25); border-radius:14px; text-decoration:none; color:inherit; background:linear-gradient(180deg,#4a0f17,#3f0b12); }
+  .v:hover { border-color:#e3bd7a; }
+  .nr { font-family:"Cormorant Garamond",serif; font-size:2rem; color:#e3bd7a; line-height:1; min-width:1.2em; }
+  strong { display:block; font-weight:500; font-size:1.1rem; margin-bottom:4px; }
+  small { display:block; color:rgba(246,236,219,.65); font-size:.92rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Übergänge zur Getränkekarte</h1>
+  <p>Jede Variante öffnet eine eigene Testfassung der Startseite. Dort auf „Zur Getränkekarte“ tippen, ganz oben im Hero oder weiter unten im Abschnitt Karte. Mit dem Logo oben links geht es zurück zur Startseite der jeweiligen Variante.</p>
+    <a class="v" href="/Kuenstlerbar/test/1/"><span class="nr">1</span><span><strong>Einschenken</strong><small>Goldene Flüssigkeit steigt vom unteren Rand hoch, die Karte öffnet sich, der Pegel läuft ab.</small></span></a>
+    <a class="v" href="/Kuenstlerbar/test/2/"><span class="nr">2</span><span><strong>Der Button wird zur Seite</strong><small>Der angeklickte Button dehnt sich bis zum Vollbild, daraus blendet die Karte auf.</small></span></a>
+    <a class="v" href="/Kuenstlerbar/test/3/"><span class="nr">3</span><span><strong>Bild fliegt mit</strong><small>Der Bildbereich der Startseite gleitet an seinen Platz auf der Karte. Chrome, Edge und Safari ab iOS 18.2; Firefox springt normal.</small></span></a>
+    <a class="v" href="/Kuenstlerbar/test/4/"><span class="nr">4</span><span><strong>Weiche Überblendung</strong><small>Die Startseite blendet sanft in die Karte über. Chrome, Edge und Safari ab iOS 18.2; Firefox springt normal.</small></span></a>
+    <a class="v" href="/Kuenstlerbar/test/5/"><span class="nr">5</span><span><strong>Angler holt die Karte</strong><small>Kurzer Wurf des Anglers, dann fährt der Vorhang hoch und die Karte ist da.</small></span></a>
+</div>
+</body>
+</html>

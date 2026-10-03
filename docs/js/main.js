@@ -1,60 +1,8 @@
+
 (function () {
   "use strict";
 
   var root = document.documentElement;
-  var EN = root.lang === "en";
-  var reduzierteBewegung = window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  var T = EN ? {
-    menueAuf: "Open menu", menueZu: "Close menu",
-    empfehlung: "Recommended",
-    offenHeute: "Open tonight, ",
-    ruhetagMorgen: function (h) { return "Closed today. Back tomorrow from " + h; },
-    ruhetagTag: function (tag, h) { return "Closed today. Back on " + tag + " from " + h; },
-    tage: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    geschlossen: "closed",
-    uhr: function (s) { return s; },
-    fruehestens: function (d) { return "The earliest possible date is " + d + ". We need two weeks to prepare."; },
-    zuFrueh: "Please pick a date at least two weeks from today.",
-    datumLocale: "en-GB",
-    paket: function (p) { return "We would like to book the “" + p + "” package."; },
-    mindestens: function (n) { return "at least " + n; },
-    mail: ["Occasion", "Preferred date", "Time", "Number of guests", "Name", "Phone"],
-    offen: "not decided yet",
-    betreff: "Enquiry",
-    bildZu: "Close image", bildansicht: "Image view"
-  } : {
-    menueAuf: "Menü öffnen", menueZu: "Menü schließen",
-    empfehlung: "Empfehlung",
-    offenHeute: "Heute geöffnet, ",
-    ruhetagMorgen: function (h) { return "Heute Ruhetag. Morgen ab " + h + " sind wir wieder da"; },
-    ruhetagTag: function (tag, h) { return "Heute Ruhetag. " + tag + " ab " + h + " geht es weiter"; },
-    tage: ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"],
-    geschlossen: "geschlossen",
-    uhr: function (s) { return s + " Uhr"; },
-    fruehestens: function (d) { return "Frühestens " + d + ", wir brauchen zwei Wochen Vorlauf."; },
-    zuFrueh: "Bitte wählt einen Termin, der mindestens zwei Wochen in der Zukunft liegt.",
-    datumLocale: "de-DE",
-    paket: function (p) { return "Wir möchten das Paket „" + p + "“ buchen."; },
-    mindestens: function (n) { return "mindestens " + n; },
-    mail: ["Anlass", "Wunschdatum", "Uhrzeit", "Anzahl Personen", "Name", "Telefon für Rückfragen"],
-    offen: "noch offen",
-    betreff: "Anfrage",
-    bildZu: "Bildansicht schließen", bildansicht: "Bildansicht"
-  };
-
-  function el(tag, className, text) {
-    var node = document.createElement(tag);
-    if (className) node.className = className;
-    if (text) node.textContent = text;
-    return node;
-  }
-
-  function alle(sel, ctx) {
-    return Array.prototype.slice.call((ctx || document).querySelectorAll(sel));
-  }
-
 
   var intro = document.querySelector(".intro");
   if (intro && root.classList.contains("mit-intro")) {
@@ -94,36 +42,89 @@
     setTimeout(function () { ersterWurfFertig = true; pruefen(); }, 2100);
     setTimeout(raus, 12000);
     intro.addEventListener("click", raus);
-    try { sessionStorage.setItem("kb-intro", "1"); } catch (e) { }
   } else {
     root.classList.add("intro-los");
   }
+})();
 
+(function () {
+  "use strict";
+
+  var reduzierteBewegung = window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function el(tag, className, text) {
+    var node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text) node.textContent = text;
+    return node;
+  }
+
+  var toggleTheme = document.querySelector(".theme-toggle");
+  var metaTheme = document.getElementById("meta-theme");
+
+  function themeAnwenden(theme, speichern) {
+    var dunkel = theme === "dark";
+    if (dunkel) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+    }
+    if (toggleTheme) {
+      toggleTheme.setAttribute("aria-pressed", dunkel ? "true" : "false");
+      toggleTheme.setAttribute("aria-label",
+        dunkel ? "Helles Design einschalten" : "Dunkles Design einschalten");
+    }
+    if (metaTheme) metaTheme.setAttribute("content", dunkel ? "#0d0407" : "#340810");
+    if (speichern) {
+      try { localStorage.setItem("kb-theme", theme); } catch (e) { }
+    }
+  }
+
+  themeAnwenden(document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "wein", false);
+
+  if (toggleTheme) {
+    toggleTheme.addEventListener("click", function () {
+      var dunkel = document.documentElement.getAttribute("data-theme") === "dark";
+      var wechseln = function () { themeAnwenden(dunkel ? "wein" : "dark", true); };
+      if (document.startViewTransition && !reduzierteBewegung) {
+        var r = toggleTheme.getBoundingClientRect();
+        document.documentElement.style.setProperty("--vt-x", (r.left + r.width / 2) + "px");
+        document.documentElement.style.setProperty("--vt-y", (r.top + r.height / 2) + "px");
+        document.startViewTransition(wechseln);
+      } else {
+        wechseln();
+      }
+    });
+  }
+
+  if (window.matchMedia) {
+    var systemDunkel = window.matchMedia("(prefers-color-scheme: dark)");
+    var aufSystem = function (e) {
+      var gespeichert;
+      try { gespeichert = localStorage.getItem("kb-theme"); } catch (err) { gespeichert = null; }
+      if (!gespeichert) themeAnwenden(e.matches ? "dark" : "wein", false);
+    };
+    if (systemDunkel.addEventListener) systemDunkel.addEventListener("change", aufSystem);
+    else if (systemDunkel.addListener) systemDunkel.addListener(aufSystem);
+  }
 
   var menuRoot = document.getElementById("menu-root");
   var menuNav = document.getElementById("menu-nav");
 
-  var UEB = EN && typeof KARTE_EN !== "undefined" ? KARTE_EN : null;
-
-  function uebersetzeZutaten(text) {
-    if (!UEB) return text;
-    return text.split(/(,\s*|\s+\/\s+)/).map(function (teil) {
-      if (/^(,\s*|\s+\/\s+)$/.test(teil)) return teil;
-      if (UEB.woerter[teil]) return UEB.woerter[teil];
-      return teil.split(" ").map(function (w) { return UEB.woerter[w] || w; }).join(" ");
-    }).join("");
-  }
-
   if (menuRoot && typeof KARTE !== "undefined") {
+    var nurListe = (menuRoot.getAttribute("data-kategorien") || "")
+      .split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+    var mitTabs = menuRoot.getAttribute("data-tabs") !== "nein" && !!menuNav;
+
     KARTE.forEach(function (kat) {
+      if (nurListe.length && nurListe.indexOf(kat.id) === -1) return;
+
       var sichtbare = kat.items.filter(function (item) { return !item.aus; });
       if (sichtbare.length === 0) return;
 
-      var titel = UEB && UEB.kategorien[kat.id] ? UEB.kategorien[kat.id] : kat.titel;
-      var hinweis = kat.hinweis ? (UEB && UEB.woerter[kat.hinweis] ? UEB.woerter[kat.hinweis] : kat.hinweis) : "";
-
-      if (menuNav) {
-        var tab = el("a", "menu-pill", titel);
+      if (mitTabs) {
+        var tab = el("a", "menu-pill", kat.titel);
         tab.href = "#karte-" + kat.id;
         menuNav.appendChild(tab);
       }
@@ -131,43 +132,135 @@
       var section = el("section", "menu-cat");
       section.id = "karte-" + kat.id;
 
-      var head = el("div", "menu-cat-head");
-      head.appendChild(el("h2", "menu-cat-title", titel));
-      if (hinweis) head.appendChild(el("p", "menu-cat-note", hinweis));
+      var head = el("div", "menu-cat-head reveal");
+      head.appendChild(el("h3", "menu-cat-title", kat.titel));
+      if (kat.hinweis) head.appendChild(el("p", "menu-cat-note", kat.hinweis));
       section.appendChild(head);
 
       var list = el("div", "menu-items");
-      sichtbare.forEach(function (item) {
-        var wrapper = el("div", "menu-item");
+      sichtbare.forEach(function (item, i) {
+        var wrapper = el("div", "menu-item reveal-item");
         wrapper.id = "drink-" + item.name.toLowerCase()
           .replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss")
           .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+        wrapper.style.setProperty("--reveal-delay", Math.min(i * 35, 300) + "ms");
 
         var row = el("div", "menu-item-row");
-        var name = el("span", "menu-item-name", UEB && UEB.namen[item.name] ? UEB.namen[item.name] : item.name);
-        if (item.tipp) name.appendChild(el("span", "badge-tipp", T.empfehlung));
+        var name = el("span", "menu-item-name", item.name);
+        if (item.tipp) name.appendChild(el("span", "badge-tipp", "Empfehlung"));
         row.appendChild(name);
         row.appendChild(el("span", "menu-item-dots"));
-        var preis = EN ? "€" + item.preis.replace(",", ".") : item.preis + " €";
-        row.appendChild(el("span", "menu-item-price", preis));
+        row.appendChild(el("span", "menu-item-price", item.preis + " €"));
         wrapper.appendChild(row);
 
-        if (item.zutaten) wrapper.appendChild(el("p", "menu-item-zutaten", uebersetzeZutaten(item.zutaten)));
+        if (item.zutaten) wrapper.appendChild(el("p", "menu-item-zutaten", item.zutaten));
         list.appendChild(wrapper);
       });
       section.appendChild(list);
       menuRoot.appendChild(section);
     });
 
-    if (location.hash) {
-      var ziel = document.getElementById(location.hash.slice(1));
-      if (ziel) setTimeout(function () { ziel.scrollIntoView(); }, 60);
+    if (mitTabs) menuNav.appendChild(el("span", "menu-indicator"));
+  }
+
+  function linieBauen(container, indicator) {
+    if (!container || !indicator) return function () {};
+
+    var setzen = function (ziel) {
+      if (!ziel) { indicator.classList.remove("sichtbar"); return; }
+      var box = ziel.getBoundingClientRect();
+      var rahmen = container.getBoundingClientRect();
+      var x = box.left - rahmen.left + container.scrollLeft;
+      indicator.style.width = box.width + "px";
+      indicator.style.transform = "translateX(" + x + "px)";
+      indicator.classList.add("sichtbar");
+    };
+
+    var aktualisieren = function () {
+      setzen(container.querySelector(":scope > .active, :scope > .nav-gruppe > .active"));
+    };
+
+    var obersteEbene = function (node) {
+      if (!node || !node.tagName) return null;
+      if (node.parentElement === container &&
+          (node.tagName === "A" || node.classList.contains("nav-gruppe-knopf"))) return node;
+      if (node.classList && node.classList.contains("nav-gruppe-knopf")) return node;
+      return null;
+    };
+    container.addEventListener("pointerover", function (e) {
+      var ziel = obersteEbene(e.target);
+      if (ziel) setzen(ziel);
+    });
+    container.addEventListener("focusin", function (e) {
+      var ziel = obersteEbene(e.target);
+      if (ziel) setzen(ziel);
+    });
+    container.addEventListener("pointerleave", aktualisieren);
+    container.addEventListener("focusout", aktualisieren);
+    container.addEventListener("scroll", aktualisieren, { passive: true });
+    window.addEventListener("resize", aktualisieren);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(aktualisieren);
+
+    aktualisieren();
+    return aktualisieren;
+  }
+
+  var hauptNav = document.querySelector(".main-nav");
+  var hauptLinie = hauptNav ? hauptNav.querySelector(".nav-indicator") : null;
+
+  if (hauptNav) {
+    var pfad = location.pathname.replace(/index\.html$/, "");
+    if (pfad !== "/" && pfad !== "") {
+      var beste = null;
+      Array.prototype.forEach.call(hauptNav.querySelectorAll("a[href]"), function (a) {
+        var ziel = a.getAttribute("href").split("#")[0];
+        if (!ziel || ziel === "/") return;
+        if (pfad.indexOf(ziel) === 0 && (!beste || ziel.length > beste.ziel.length)) {
+          beste = { link: a, ziel: ziel };
+        }
+      });
+      if (beste) {
+        beste.link.classList.add("active");
+        beste.link.setAttribute("aria-current", "page");
+        var gruppe = beste.link.closest(".nav-gruppe");
+        if (gruppe) {
+          var knopf = gruppe.querySelector(".nav-gruppe-knopf");
+          if (knopf) knopf.classList.add("active");
+        }
+      }
     }
   }
 
+  Array.prototype.forEach.call(document.querySelectorAll(".nav-gruppe"), function (gruppe) {
+    var knopf = gruppe.querySelector(".nav-gruppe-knopf");
+    var liste = gruppe.querySelector(".nav-untermenue");
+    if (!knopf || !liste) return;
+
+    var zu = function () {
+      liste.classList.remove("offen");
+      knopf.setAttribute("aria-expanded", "false");
+    };
+
+    knopf.addEventListener("click", function () {
+      var offen = liste.classList.toggle("offen");
+      knopf.setAttribute("aria-expanded", offen ? "true" : "false");
+    });
+
+    gruppe.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { zu(); knopf.focus(); }
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!gruppe.contains(e.target)) zu();
+    });
+  });
+
+  var hauptLinieAktualisieren = linieBauen(hauptNav, hauptLinie);
+  var menuLinieAktualisieren = linieBauen(menuNav, menuNav ? menuNav.querySelector(".menu-indicator") : null);
+
   if (menuRoot && menuNav) {
-    var tabs = alle(".menu-pill", menuNav);
-    var cats = alle(".menu-cat", menuRoot);
+    var tabs = Array.prototype.slice.call(menuNav.querySelectorAll(".menu-pill"));
+    var cats = Array.prototype.slice.call(menuRoot.querySelectorAll(".menu-cat"));
 
     var setActive = function (id) {
       tabs.forEach(function (p) {
@@ -176,13 +269,23 @@
         if (on) {
           p.setAttribute("aria-current", "true");
           var mitte = p.offsetLeft + p.offsetWidth / 2 - menuNav.clientWidth / 2;
-          menuNav.scrollTo({ left: Math.max(0, mitte), behavior: reduzierteBewegung ? "auto" : "smooth" });
+          var maximal = menuNav.scrollWidth - menuNav.clientWidth;
+          var ziel = Math.max(0, Math.min(mitte, maximal));
+          if (Math.abs(menuNav.scrollLeft - ziel) > 1) {
+            menuNav.scrollTo({ left: ziel, behavior: reduzierteBewegung ? "auto" : "smooth" });
+          }
         } else {
           p.removeAttribute("aria-current");
         }
       });
+      menuLinieAktualisieren();
     };
-    if (tabs[0]) tabs[0].classList.add("active");
+
+    if (tabs.length) {
+      tabs[0].classList.add("active");
+      tabs[0].setAttribute("aria-current", "true");
+      menuLinieAktualisieren();
+    }
 
     if ("IntersectionObserver" in window && cats.length) {
       var spy = new IntersectionObserver(function (entries) {
@@ -194,251 +297,238 @@
     }
   }
 
-
-  var hauptNav = document.querySelector(".main-nav");
-  var toggle = document.querySelector(".nav-toggle");
-
-  if (hauptNav) {
-    alle(":scope > a, :scope > .nav-gruppe > .nav-gruppe-knopf, :scope > .sprache", hauptNav)
-      .forEach(function (node, i) { node.style.setProperty("--i", i); });
-
-    var pfad = location.pathname.replace(/index\.html$/, "");
-    var marke = document.querySelector(".brand");
-    var start = marke ? marke.getAttribute("href") : (EN ? "/en/" : "/");
-    if (pfad !== start) {
-      var beste = null;
-      alle("a[href]", hauptNav).forEach(function (a) {
-        if (a.closest(".sprache")) return;
-        var ziel = a.getAttribute("href").split("#")[0];
-        if (!ziel || ziel === start) return;
-        if (pfad.indexOf(ziel) === 0 && (!beste || ziel.length > beste.ziel.length)) {
-          beste = { link: a, ziel: ziel };
+  var navLinks = Array.prototype.slice.call(
+    document.querySelectorAll(".main-nav a[href*='#'], .main-nav [data-spy]"));
+  if (navLinks.length && "IntersectionObserver" in window) {
+    var navZiele = navLinks
+      .map(function (a) {
+        var spy = a.getAttribute("data-spy");
+        if (spy) {
+          var abschnitt = document.getElementById(spy);
+          return abschnitt ? { link: a, ziel: abschnitt } : null;
         }
-      });
-      if (beste) {
-        beste.link.classList.add("active");
-        beste.link.setAttribute("aria-current", "page");
-        var gruppe = beste.link.closest(".nav-gruppe");
-        if (gruppe) gruppe.querySelector(".nav-gruppe-knopf").classList.add("active");
-      }
+        var href = a.getAttribute("href") || "";
+        var raute = href.indexOf("#");
+        if (raute === -1) return null;
+        var pfadTeil = href.slice(0, raute).replace(/index\.html$/, "");
+        if (pfadTeil && pfadTeil !== location.pathname.replace(/index\.html$/, "")) return null;
+        var ziel = document.getElementById(href.slice(raute + 1));
+        return ziel ? { link: a, ziel: ziel } : null;
+      })
+      .filter(Boolean);
+
+    if (navZiele.length) {
+      var navAktiv = function (id) {
+        navZiele.forEach(function (paar) {
+          var on = paar.ziel.id === id;
+          paar.link.classList.toggle("active", on);
+          if (on) paar.link.setAttribute("aria-current", "true");
+          else paar.link.removeAttribute("aria-current");
+        });
+        hauptLinieAktualisieren();
+      };
+
+      var navSpy = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) navAktiv(entry.target.id);
+        });
+      }, { rootMargin: "-45% 0px -50% 0px" });
+      navZiele.forEach(function (paar) { navSpy.observe(paar.ziel); });
     }
   }
 
-  var navSchliessen = function () {
-    if (!hauptNav || !toggle) return;
-    hauptNav.classList.remove("open");
-    document.body.classList.remove("nav-offen");
-    root.classList.remove("nav-offen");
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.setAttribute("aria-label", T.menueAuf);
-  };
-
-  if (toggle && hauptNav) {
-    toggle.addEventListener("click", function () {
-      var open = hauptNav.classList.toggle("open");
-      document.body.classList.toggle("nav-offen", open);
-      root.classList.toggle("nav-offen", open);
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      toggle.setAttribute("aria-label", open ? T.menueZu : T.menueAuf);
-    });
-    hauptNav.addEventListener("click", function (e) {
-      if (e.target.closest("a")) navSchliessen();
-    });
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && hauptNav.classList.contains("open")) { navSchliessen(); toggle.focus(); }
-    });
-    window.addEventListener("resize", function () {
-      if (window.innerWidth > 900 && hauptNav.classList.contains("open")) navSchliessen();
-    });
-  }
-
-  alle(".nav-gruppe").forEach(function (gruppe) {
-    var knopf = gruppe.querySelector(".nav-gruppe-knopf");
-    var liste = gruppe.querySelector(".nav-untermenue");
-    if (!knopf || !liste) return;
-    var zu = function () {
-      liste.classList.remove("offen");
-      knopf.setAttribute("aria-expanded", "false");
-    };
-    knopf.addEventListener("click", function () {
-      var offen = liste.classList.toggle("offen");
-      knopf.setAttribute("aria-expanded", offen ? "true" : "false");
-    });
-    gruppe.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") { zu(); knopf.focus(); }
-    });
-    document.addEventListener("click", function (e) {
-      if (!gruppe.contains(e.target) && window.innerWidth > 900) zu();
-    });
-  });
-
-  var navZiele = alle(".main-nav a[href*='#'], .main-nav [data-spy]")
-    .map(function (a) {
-      var spyId = a.getAttribute("data-spy");
-      if (spyId) {
-        var abschnitt = document.getElementById(spyId);
-        return abschnitt ? { link: a, ziel: abschnitt } : null;
-      }
-      var href = a.getAttribute("href") || "";
-      var raute = href.indexOf("#");
-      var pfadTeil = href.slice(0, raute).replace(/index\.html$/, "");
-      if (pfadTeil && pfadTeil !== location.pathname.replace(/index\.html$/, "")) return null;
-      var ziel = document.getElementById(href.slice(raute + 1));
-      return ziel ? { link: a, ziel: ziel } : null;
-    })
-    .filter(Boolean);
-
-  if (navZiele.length && "IntersectionObserver" in window) {
-    var navSpy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        navZiele.forEach(function (paar) {
-          var on = paar.ziel === entry.target;
-          paar.link.classList.toggle("active", on);
-        });
-      });
-    }, { rootMargin: "-45% 0px -50% 0px" });
-    navZiele.forEach(function (paar) { navSpy.observe(paar.ziel); });
-  }
-
-
   var header = document.querySelector(".site-header");
-  var fxBilder = alle("[data-fx='zoom'], [data-fx='schieben']");
-  var sichtbareFx = [];
-  var tickt = false;
+  var heroBg = document.querySelector(".hero-bg");
+  var menuLeiste = document.querySelector(".menu-nav");
+  var scrollTickt = false;
 
-  if ("IntersectionObserver" in window && !reduzierteBewegung) {
-    var fxBeobachter = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        var i = sichtbareFx.indexOf(entry.target);
-        if (entry.isIntersecting && i === -1) sichtbareFx.push(entry.target);
-        if (!entry.isIntersecting && i !== -1) sichtbareFx.splice(i, 1);
-      });
-      anstossen();
-    }, { rootMargin: "10% 0px 10% 0px" });
-    fxBilder.forEach(function (b) { fxBeobachter.observe(b); });
+  var haftGrenze = 0;
+
+  function haftGrenzeMessen() {
+    var stil = getComputedStyle(document.documentElement);
+    var hoehe = parseFloat(stil.getPropertyValue("--header-h")) || 0;
+    var abstand = parseFloat(stil.getPropertyValue("--header-gap")) || 0;
+    haftGrenze = hoehe + abstand;
   }
 
-  function fxRechnen() {
-    var h = window.innerHeight;
-    sichtbareFx.forEach(function (b) {
-      var r = b.getBoundingClientRect();
-      var p = (h - r.top) / (h + r.height);
-      p = Math.max(0, Math.min(1, p));
-      if (b.getAttribute("data-fx") === "zoom") {
-        var z = 1.18 - 0.18 * Math.min(1, p / 0.62);
-        b.style.setProperty("--zoom", z.toFixed(4));
-      } else {
-        b.style.setProperty("--versatz", (-16 * p).toFixed(2) + "%");
-      }
-    });
-  }
-
-  var heroBild = document.querySelector(".hero-bild");
+  if (menuLeiste) haftGrenzeMessen();
 
   function onScroll() {
     if (header) header.classList.toggle("scrolled", window.scrollY > 24);
-    if (heroBild && !reduzierteBewegung && window.scrollY < window.innerHeight * 1.2) {
-      heroBild.style.transform = "translate3d(0," + (window.scrollY * 0.3).toFixed(1) + "px,0)";
+    if (menuLeiste) {
+      document.body.classList.toggle(
+        "leiste-haftet",
+        menuLeiste.getBoundingClientRect().top <= haftGrenze + 1
+      );
     }
-    fxRechnen();
-    tickt = false;
+    if (heroBg && !reduzierteBewegung && window.scrollY < window.innerHeight * 1.2) {
+      heroBg.style.transform = "translate3d(0," + (window.scrollY * 0.22).toFixed(1) + "px,0)";
+    }
+    scrollTickt = false;
   }
-  function anstossen() {
-    if (!tickt) { tickt = true; window.requestAnimationFrame(onScroll); }
+  window.addEventListener("scroll", function () {
+    if (!scrollTickt) {
+      scrollTickt = true;
+      window.requestAnimationFrame(onScroll);
+    }
+  }, { passive: true });
+  if (menuLeiste) {
+    window.addEventListener("resize", function () {
+      haftGrenzeMessen();
+      onScroll();
+    }, { passive: true });
   }
-  window.addEventListener("scroll", anstossen, { passive: true });
-  window.addEventListener("resize", anstossen, { passive: true });
   onScroll();
-
-  var reveals = alle(".reveal, [data-fx='vorhang']");
-  alle(".reveal-group").forEach(function (group) {
-    alle(".reveal, [data-fx='vorhang']", group).forEach(function (kind, i) {
-      kind.style.setProperty("--reveal-delay", Math.min(i * 90, 450) + "ms");
-      kind.style.transitionDelay = Math.min(i * 90, 450) + "ms";
-    });
-  });
-  if ("IntersectionObserver" in window && !reduzierteBewegung) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible", "sichtbar");
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
-    reveals.forEach(function (r) { io.observe(r); });
-  } else {
-    reveals.forEach(function (r) { r.classList.add("visible", "sichtbar"); });
-  }
-
 
   var hero = document.querySelector(".hero[data-video]");
   if (hero && !reduzierteBewegung &&
-      window.matchMedia("(min-width: 860px)").matches &&
+      window.matchMedia && window.matchMedia("(min-width: 860px)").matches &&
       !(navigator.connection && navigator.connection.saveData)) {
+
     var basis = hero.getAttribute("data-video");
     var video = document.createElement("video");
     video.className = "hero-video";
-    video.muted = true; video.defaultMuted = true; video.loop = true; video.autoplay = true;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.loop = true;
+    video.autoplay = true;
     video.playsInline = true;
     video.setAttribute("playsinline", "");
     video.setAttribute("aria-hidden", "true");
     video.setAttribute("tabindex", "-1");
     video.preload = "metadata";
-    video.poster = hero.querySelector(".hero-bild img").getAttribute("src");
-    var videoDa = false;
-    var wartezeit = setTimeout(function () { if (!videoDa) video.remove(); }, 5000);
+    video.poster = "/assets/img/hero-bar-video-poster.jpg";
+    video.playbackRate = 0.45;
+
+    var geladen = false;
+    var wartezeit = setTimeout(function () {
+      if (!geladen) video.remove();
+    }, 5000);
+
+    var formate = ["webm", "mp4"];
     var gescheitert = 0;
-    ["webm", "mp4"].forEach(function (typ) {
+    formate.forEach(function (typ) {
       var q = document.createElement("source");
       q.src = basis + "." + typ;
-      q.type = "video/" + typ;
+      q.type = typ === "webm" ? "video/webm" : "video/mp4";
       q.addEventListener("error", function () {
-        if (++gescheitert >= 2) { clearTimeout(wartezeit); video.remove(); }
+        gescheitert++;
+        if (gescheitert >= formate.length) { clearTimeout(wartezeit); video.remove(); }
       });
       video.appendChild(q);
     });
+
     video.addEventListener("canplay", function () {
-      videoDa = true; clearTimeout(wartezeit);
+      geladen = true;
+      clearTimeout(wartezeit);
       video.playbackRate = 0.45;
       video.classList.add("bereit");
     });
-    hero.querySelector(".hero-bild").appendChild(video);
+    video.addEventListener("error", function () { clearTimeout(wartezeit); video.remove(); });
+
+    var schleier = hero.querySelector(".hero-schleier");
+    if (schleier) hero.insertBefore(video, schleier);
+    else hero.insertBefore(video, hero.firstChild);
+
     var abspielen = video.play();
     if (abspielen && abspielen.catch) abspielen.catch(function () { });
   }
 
+  var toggle = document.querySelector(".nav-toggle");
+  if (toggle && hauptNav) {
+    toggle.addEventListener("click", function () {
+      var open = hauptNav.classList.toggle("open");
+      document.body.classList.toggle("nav-offen", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Menü schließen" : "Menü öffnen");
+    });
+    hauptNav.addEventListener("click", function (e) {
+      if (e.target.tagName === "A") {
+        hauptNav.classList.remove("open");
+        document.body.classList.remove("nav-offen");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
 
+  document.querySelectorAll(".reveal-group").forEach(function (group) {
+    var kinder = group.querySelectorAll(".reveal");
+    kinder.forEach(function (kind, i) {
+      kind.style.setProperty("--reveal-delay", Math.min(i * 90, 450) + "ms");
+    });
+  });
+
+  var reveals = document.querySelectorAll(".reveal, .reveal-item, .ornament");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -4% 0px" });
+    reveals.forEach(function (r) { io.observe(r); });
+  } else {
+    reveals.forEach(function (r) { r.classList.add("visible"); });
+  }
+
+  if (window.matchMedia && window.matchMedia("(hover: hover)").matches && !reduzierteBewegung) {
+    document.querySelectorAll(".reco-card").forEach(function (card) {
+      card.addEventListener("pointerenter", function () { card.classList.add("tilt"); });
+      card.addEventListener("pointermove", function (e) {
+        var r = card.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5;
+        var y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = "translateY(-8px) perspective(900px) rotateX(" +
+          (-y * 3.5).toFixed(2) + "deg) rotateY(" + (x * 4.5).toFixed(2) + "deg)";
+      });
+      card.addEventListener("pointerleave", function () {
+        card.classList.remove("tilt");
+        card.style.transform = "";
+      });
+    });
+  }
+
+  var wochentage = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
   var heute = new Date().getDay();
   var tagZeile = {};
-  alle(".hours tr[data-tage]").forEach(function (tr) {
+
+  document.querySelectorAll(".hours tr[data-tage]").forEach(function (tr) {
     var tage = tr.getAttribute("data-tage").split(",").map(Number);
     var zelle = tr.querySelector("td");
     tage.forEach(function (tag) { tagZeile[tag] = zelle; });
     if (tage.indexOf(heute) !== -1) tr.classList.add("heute");
   });
 
-  function stunde(text) {
-    var t = text.match(/(\d{1,2})(?::00)?\s*(am|pm)?/i);
-    if (!t) return "";
-    return T.uhr(t[2] ? t[1] + " " + t[2] : String(parseInt(t[1], 10)));
+  function kurzeZeit(text) {
+    return text.replace(/(\d{2}):00/g, function (_, stunde) {
+      return String(parseInt(stunde, 10));
+    });
+  }
+
+  function ersteStunde(text) {
+    var treffer = text.match(/^(\d{2}):00/);
+    return treffer ? String(parseInt(treffer[1], 10)) : "";
   }
 
   var status = document.getElementById("offen-status");
   var heutigeZelle = tagZeile[heute];
   if (status && heutigeZelle) {
     var heutigerText = heutigeZelle.textContent.trim();
-    if (heutigerText.toLowerCase() !== T.geschlossen) {
-      status.textContent = T.offenHeute + heutigerText.replace(/(\d{2}):00/g, function (_, h) { return String(parseInt(h, 10)); });
+    if (heutigerText.toLowerCase() !== "geschlossen") {
+      status.textContent = "Heute für euch geöffnet, " + kurzeZeit(heutigerText);
     } else {
       for (var i = 1; i <= 7; i++) {
         var tag = (heute + i) % 7;
         var zelle = tagZeile[tag];
         if (!zelle) continue;
         var text = zelle.textContent.trim();
-        if (text.toLowerCase() !== T.geschlossen) {
-          status.textContent = i === 1 ? T.ruhetagMorgen(stunde(text)) : T.ruhetagTag(T.tage[tag], stunde(text));
+        if (text.toLowerCase() !== "geschlossen") {
+          var stunde = ersteStunde(text);
+          status.textContent = i === 1
+            ? "Heute Ruhetag. Morgen ab " + stunde + " Uhr sind wir wieder da"
+            : "Heute Ruhetag. " + wochentage[tag] + " ab " + stunde + " Uhr geht es weiter";
           break;
         }
       }
@@ -448,8 +538,7 @@
   var jahr = document.getElementById("jahr");
   if (jahr) jahr.textContent = new Date().getFullYear();
 
-
-  alle(".js-mail").forEach(function (node) {
+  Array.prototype.forEach.call(document.querySelectorAll(".js-mail"), function (node) {
     var adresse = node.getAttribute("data-user") + "@" + node.getAttribute("data-domain");
     var ziel = "mailto:" + adresse;
     var teile = [];
@@ -462,19 +551,24 @@
   });
 
   var dialog = document.getElementById("anfrage-dialog");
-  var anfrageKnoepfe = alle(".js-anfrage");
+  var anfrageKnoepfe = document.querySelectorAll(".js-anfrage");
+
   var feldDatum = dialog ? dialog.querySelector("#anfrage-datum") : null;
   var VORLAUF_TAGE = 14;
 
   var alsIsoDatum = function (d) {
-    return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+    return d.getFullYear() + "-" +
+      ("0" + (d.getMonth() + 1)).slice(-2) + "-" +
+      ("0" + d.getDate()).slice(-2);
   };
+
   var fruehesterTermin = function () {
     var d = new Date();
     d.setHours(0, 0, 0, 0);
     d.setDate(d.getDate() + VORLAUF_TAGE);
     return d;
   };
+
   var datumGrenzeSetzen = function () {};
   var datumPruefen = function () {};
 
@@ -484,15 +578,25 @@
       feldDatum.min = alsIsoDatum(grenze);
       var hinweis = dialog.querySelector("#anfrage-datum-hinweis");
       if (hinweis) {
-        hinweis.textContent = T.fruehestens(grenze.toLocaleDateString(T.datumLocale,
-          { day: "2-digit", month: "2-digit", year: "numeric" }));
+        hinweis.textContent = "Frühestens " +
+          grenze.toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit", year: "numeric" }) +
+          ", wir brauchen zwei Wochen Vorlauf.";
       }
     };
+
     datumPruefen = function () {
-      if (!feldDatum.value) { feldDatum.setCustomValidity(""); return; }
+      if (!feldDatum.value) {
+        feldDatum.setCustomValidity("");
+        return;
+      }
       var gewaehlt = new Date(feldDatum.value + "T00:00:00");
-      feldDatum.setCustomValidity(gewaehlt < fruehesterTermin() ? T.zuFrueh : "");
+      feldDatum.setCustomValidity(
+        gewaehlt < fruehesterTermin()
+          ? "Bitte wählt einen Termin, der mindestens zwei Wochen in der Zukunft liegt."
+          : ""
+      );
     };
+
     datumGrenzeSetzen();
     feldDatum.addEventListener("input", datumPruefen);
     feldDatum.addEventListener("change", datumPruefen);
@@ -501,38 +605,46 @@
   if (dialog && anfrageKnoepfe.length && typeof dialog.showModal === "function") {
     var form = dialog.querySelector("form");
     var feldAnlass = dialog.querySelector("#anfrage-anlass");
+    var zuKnopf = dialog.querySelector(".anfrage-zu");
+    var letzterKnopf = null;
+
     var feldNachricht = dialog.querySelector("#anfrage-nachricht");
     var feldPersonen = dialog.querySelector("#anfrage-personen");
     var STANDARD_PLATZHALTER = feldPersonen ? feldPersonen.placeholder : "";
     var letzteAutoNachricht = "";
-    var letzterKnopf = null;
 
-    anfrageKnoepfe.forEach(function (knopf) {
+    var oeffnenDialog = function (knopf) {
+      letzterKnopf = knopf;
+      var anlass = knopf.getAttribute("data-anlass");
+      if (anlass && feldAnlass) {
+        Array.prototype.forEach.call(feldAnlass.options, function (o) {
+          if (o.value === anlass) feldAnlass.value = anlass;
+        });
+      }
+      var paket = knopf.getAttribute("data-paket");
+      var neueAutoNachricht = paket ? "Wir möchten das Paket „" + paket + "“ buchen." : "";
+      if (feldNachricht && (feldNachricht.value === "" || feldNachricht.value === letzteAutoNachricht)) {
+        feldNachricht.value = neueAutoNachricht;
+      }
+      letzteAutoNachricht = neueAutoNachricht;
+
+      var minPersonen = knopf.getAttribute("data-min");
+      if (feldPersonen) feldPersonen.placeholder = minPersonen ? "mindestens " + minPersonen : STANDARD_PLATZHALTER;
+
+      if (feldDatum) datumGrenzeSetzen();
+
+      dialog.showModal();
+      var erstes = dialog.querySelector("select, input");
+      if (erstes) erstes.focus();
+    };
+
+    Array.prototype.forEach.call(anfrageKnoepfe, function (knopf) {
       knopf.addEventListener("click", function (e) {
         e.preventDefault();
-        letzterKnopf = knopf;
-        var anlass = knopf.getAttribute("data-anlass");
-        if (anlass && feldAnlass) {
-          alle("option", feldAnlass).forEach(function (o) {
-            if (o.value === anlass) feldAnlass.value = anlass;
-          });
-        }
-        var paket = knopf.getAttribute("data-paket");
-        var neu = paket ? T.paket(paket) : "";
-        if (feldNachricht && (feldNachricht.value === "" || feldNachricht.value === letzteAutoNachricht)) {
-          feldNachricht.value = neu;
-        }
-        letzteAutoNachricht = neu;
-        var minPersonen = knopf.getAttribute("data-min");
-        if (feldPersonen) feldPersonen.placeholder = minPersonen ? T.mindestens(minPersonen) : STANDARD_PLATZHALTER;
-        datumGrenzeSetzen();
-        dialog.showModal();
-        var erstes = dialog.querySelector("select, input");
-        if (erstes) erstes.focus();
+        oeffnenDialog(knopf);
       });
     });
 
-    var zuKnopf = dialog.querySelector(".anfrage-zu");
     if (zuKnopf) zuKnopf.addEventListener("click", function () { dialog.close(); });
     dialog.addEventListener("close", function () {
       if (letzterKnopf && letzterKnopf.focus) letzterKnopf.focus();
@@ -541,53 +653,59 @@
     if (form) {
       form.addEventListener("submit", function (e) {
         e.preventDefault();
+
         var wert = function (name) {
           var f = form.elements[name];
           return f && f.value ? f.value.trim() : "";
         };
+
         var datum = wert("datum");
         if (feldDatum && datum) {
           datumPruefen();
-          if (!feldDatum.checkValidity()) { feldDatum.reportValidity(); return; }
+          if (!feldDatum.checkValidity()) {
+            feldDatum.reportValidity();
+            return;
+          }
         }
         if (/^\d{4}-\d{2}-\d{2}$/.test(datum)) {
           var t = datum.split("-");
-          datum = EN ? t[2] + "/" + t[1] + "/" + t[0] : t[2] + "." + t[1] + "." + t[0];
+          datum = t[2] + "." + t[1] + "." + t[0];
         }
-        var anlass = wert("anlass") || T.betreff;
-        var m = T.mail;
+
+        var anlass = wert("anlass") || "Anfrage";
         var zeilen = [
-          m[0] + ": " + anlass,
-          m[1] + ": " + (datum || T.offen),
-          m[2] + ": " + (wert("uhrzeit") || T.offen),
-          m[3] + ": " + (wert("personen") || T.offen),
-          m[4] + ": " + wert("name"),
-          m[5] + ": " + wert("telefon")
+          "Anlass: " + anlass,
+          "Wunschdatum: " + (datum || "noch offen"),
+          "Uhrzeit: " + (wert("uhrzeit") || "noch offen"),
+          "Anzahl Personen: " + (wert("personen") || "noch offen"),
+          "Name: " + wert("name"),
+          "Telefon für Rückfragen: " + wert("telefon")
         ];
         var nachricht = wert("nachricht");
         if (nachricht) zeilen.push("", nachricht);
+
         var adresse = dialog.getAttribute("data-user") + "@" + dialog.getAttribute("data-domain");
         window.location.href = "mailto:" + adresse +
-          "?subject=" + encodeURIComponent(T.betreff + " " + anlass) +
+          "?subject=" + encodeURIComponent("Anfrage " + anlass) +
           "&body=" + encodeURIComponent(zeilen.join("\n") + "\n");
+
         dialog.close();
       });
     }
   }
 
-
-  var galerieBilder = alle(".gallery figure img");
+  var galerieBilder = document.querySelectorAll(".gallery figure img");
   if (galerieBilder.length) {
     var lightbox = el("div", "lightbox");
     lightbox.setAttribute("role", "dialog");
     lightbox.setAttribute("aria-modal", "true");
-    lightbox.setAttribute("aria-label", T.bildansicht);
+    lightbox.setAttribute("aria-label", "Bildansicht");
     var grossbild = el("img");
-    grossbild.alt = "";
+    grossbild.setAttribute("alt", "");
     var schliessen = el("button", "lightbox-close");
     schliessen.type = "button";
-    schliessen.setAttribute("aria-label", T.bildZu);
-    schliessen.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>';
+    schliessen.setAttribute("aria-label", "Bildansicht schließen");
+    schliessen.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
     lightbox.appendChild(grossbild);
     lightbox.appendChild(schliessen);
     document.body.appendChild(lightbox);
@@ -604,6 +722,7 @@
       lightbox.classList.remove("open");
       if (vorherFokus && vorherFokus.focus) vorherFokus.focus();
     };
+
     galerieBilder.forEach(function (img) {
       img.setAttribute("role", "button");
       img.setAttribute("tabindex", "0");
@@ -612,9 +731,47 @@
         if (e.key === "Enter" || e.key === " ") { e.preventDefault(); oeffnen(img); }
       });
     });
-    lightbox.addEventListener("click", function (e) { if (e.target !== grossbild) zu(); });
+
+    lightbox.addEventListener("click", function (e) {
+      if (e.target !== grossbild) zu();
+    });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && lightbox.classList.contains("open")) zu();
     });
   }
+})();
+
+(function () {
+  "use strict";
+
+  var ns = "http://www.w3.org/2000/svg";
+  var svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("width", "0");
+  svg.setAttribute("height", "0");
+  svg.setAttribute("aria-hidden", "true");
+  svg.style.position = "absolute";
+  svg.innerHTML =
+    '<filter id="glas-linse" primitiveUnits="objectBoundingBox">' +
+    '<feImage result="karte" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" href="/Kuenstlerbar/assets/img/glas-linse.png"/>' +
+    '<feGaussianBlur in="SourceGraphic" stdDeviation="0.02" result="weich"/>' +
+    '<feDisplacementMap in="weich" in2="karte" scale="0.5" xChannelSelector="R" yChannelSelector="G"/>' +
+    '</filter>';
+  document.body.insertBefore(svg, document.body.firstChild);
+
+  Array.prototype.forEach.call(document.querySelectorAll(".btn"), function (knopf) {
+    var zeit;
+    var an = function () {
+      clearTimeout(zeit);
+      knopf.classList.remove("gedrueckt");
+      void knopf.offsetWidth;
+      knopf.classList.add("gedrueckt");
+    };
+    var aus = function () {
+      zeit = setTimeout(function () { knopf.classList.remove("gedrueckt"); }, 480);
+    };
+    knopf.addEventListener("pointerdown", an);
+    knopf.addEventListener("pointerup", aus);
+    knopf.addEventListener("pointerleave", aus);
+    knopf.addEventListener("pointercancel", aus);
+  });
 })();
